@@ -1,6 +1,5 @@
 package com.elesinsergei.narvaonline.pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverConditions;
 
 import java.time.Duration;
@@ -24,7 +23,7 @@ public class HomePage {
 
     //проверяем тайтл страницы
     public void verifyPageTitle(String expectedTitle) {
-        Selenide.webdriver().shouldHave(WebDriverConditions.title(expectedTitle), Duration.ofSeconds(10));
+        webdriver().shouldHave(WebDriverConditions.title(expectedTitle), Duration.ofSeconds(10));
     }
 
     //проверяем видимость заголовка поста в списке постов
