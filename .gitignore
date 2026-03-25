@@ -23,6 +23,10 @@ allure-results/
 allure-report/
 .allure/
 
+# Generated code
+**/generated/
+**/generated_tests/
+
 # System
 *.log
 .DS_Store
