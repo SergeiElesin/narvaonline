@@ -6,7 +6,6 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
-import static com.codeborne.selenide.WebDriverConditions.url;
 
 import java.time.Duration;
 
@@ -33,7 +32,7 @@ public class PostEditorPage{
     public void verifyDraftSavedWithTimeout(int seconds) {
         $("[data-testid='snackbar']")
                 .shouldBe(visible, Duration.ofSeconds(seconds))
-                .shouldHave(text("Черновик сохранён"));;
+                .shouldHave(text("Черновик сохранён"));
     }
 
     // Метод для удаления черновика в корзину
@@ -56,7 +55,6 @@ public class PostEditorPage{
                 .click();
 
         // Ждем, пока нас перенаправит в список постов
-        //webdriver().shouldHave(urlContaining("edit.php"));
         webdriver().shouldHave(urlContaining("edit.php"), Duration.ofSeconds(12));
 
     }

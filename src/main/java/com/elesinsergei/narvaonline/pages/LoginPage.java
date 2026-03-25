@@ -1,10 +1,6 @@
 package com.elesinsergei.narvaonline.pages;
 
-//import static com.codeborne.selenide.Selenide.executeJavaScript;
-
-import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
@@ -50,7 +46,7 @@ public class LoginPage {
     }
 
     //Разлогинивание через UI
-    public void logoutViaUI() {
+    /*public void logoutViaUI() {
         // 1. Наводим мышь на профиль (обычно ID #wp-admin-bar-my-account)
         $("#wp-admin-bar-my-account").hover();
 
@@ -60,7 +56,7 @@ public class LoginPage {
 
         // 3. Опционально: проверяем, что мы попали на страницу логина
         $("#loginform").shouldBe(Condition.visible);
-    }
+    }*/
 
     //Разлогинивание быстрое - через очистку сессии
     public void fastLogout() {
@@ -69,7 +65,7 @@ public class LoginPage {
     }
 
     //Разлогинивание через url
-    public void logoutViaUrl() {
+    /*public void logoutViaUrl() {
         // WordPress использует nonce для защиты от CSRF, поэтому просто /wp-login.php?action=logout может не сработать без подтверждения.
         // Самый простой способ — открыть страницу логина, она часто сбрасывает сессию, если передать параметр.
         open("/wp-login.php?action=logout");
@@ -78,7 +74,7 @@ public class LoginPage {
         if ($("a[href*='action=logout']").exists()) {
             $("a[href*='action=logout']").click();
         }
-    }
+    }*/
 
 
 

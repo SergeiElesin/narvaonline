@@ -4,7 +4,6 @@ import com.elesinsergei.narvaonline.BaseTest;
 import com.elesinsergei.narvaonline.pages.HomePage;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Epic("UI Tests")
