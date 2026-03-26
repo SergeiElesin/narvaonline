@@ -57,7 +57,7 @@ dependencies {
     testImplementation("io.qameta.allure:allure-selenide:${allureVersion}")
     testImplementation("io.qameta.allure:allure-rest-assured:${allureVersion}")
     testImplementation("io.qameta.allure:allure-junit5:${allureVersion}")
-    testImplementation("io.qameta.allure:allure-assertj:${allureVersion}")
+    implementation("io.qameta.allure:allure-assertj:${allureVersion}")
 
     //Class watcher (recommended testRuntimeOnly)
     testRuntimeOnly("org.aspectj:aspectjweaver:${aspectjVersion}")
