@@ -14,6 +14,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
@@ -51,7 +55,15 @@ public class OrganizationHybridTest extends BaseTest {
         orgEditorPage.publish();
 
         // 4. Получаем ID созданного поста из URL (нужно для его удаления)
-        int postId = Integer.parseInt(WebDriverRunner.url().replaceAll(".*post=(\\d+).*", "$1"));
+        //int postId = Integer.parseInt(WebDriverRunner.url().replaceAll(".*post=(\\d+).*", "$1"));
+        int postId = Optional.ofNullable(WebDriverRunner.url())
+                .map(url -> {
+                    Matcher m = Pattern.compile("post=(\\d+)").matcher(url);
+                    return m.find() ? m.group(1) : null;
+                })
+                .map(Integer::parseInt)
+                .orElseThrow(() -> new RuntimeException("Can't get postId from URL"));
+
 
         // 5. Проверка наличия организации фронтенде
         open("/katalog-organizatsij/");
