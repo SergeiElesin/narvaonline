@@ -27,7 +27,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(1)
-    @DisplayName("Шаг 1: Регистрация через форму UM")
+    @DisplayName("Step1: Registration via UM")
     @Story("User registration")
     public void registerTest(){
         advertsRegisterPage.register(TEST_USERNAME, TEST_EMAIL, TEST_PASSWORD);
@@ -37,7 +37,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(2)
-    @DisplayName("Шаг 2: Заполнение формы объявления")
+    @DisplayName("Step 2: Ad form filling")
     @Story("Form filling")
     public void addAdvert(){
         advertsAddPage.fillForm(ADD_AD_PAGE, AD_PHONE, AD_TITLE, AD_DESCRIPTION, AD_PRICE, AD_LOCATION);
@@ -48,7 +48,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(3)
-    @DisplayName("Шаг 3: Предпросмотр объявления")
+    @DisplayName("Step 3: Ad review")
     @Story("Ad review")
     public void checkUsernameAndPrice(){
         advertsPreviewPage.previewAd(TEST_USERNAME, AD_PRICE);
@@ -57,7 +57,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(4)
-    @DisplayName("Шаг 4: Публикация объявления")
+    @DisplayName("Step 4: Ad publishing")
     @Story("Ad publishing")
     public void publish(){
         advertsPreviewPage.publishAd();
@@ -69,7 +69,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(5)
-    @DisplayName("Шаг 5: Убедиться в публикации объявления")
+    @DisplayName("Step 5: Publish confirm")
     @Story("Confirm publishing")
     public void review(){
         advertsPreviewPage.verifyAd(ADS_PAGE);
@@ -81,7 +81,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(6)
-    @DisplayName("Шаг 6: Удаление объявления")
+    @DisplayName("Step 6: Deleting ad")
     @Story("Ad deleting")
     public void deleteAdv(){
         advertsDeleteAdversePage.deleteAd(MY_ADS_PAGE, AD_TITLE, MY_ADS_PAGE);
@@ -93,7 +93,7 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(7)
-    @DisplayName("Шаг 7: Удаление пользователя")
+    @DisplayName("Step 7: Deleting user")
     @Story("User deleting")
     public void deleteUser(){
         advertsDeleteUserPage.deleteUser(MY_ACCOUNT, TEST_PASSWORD);
