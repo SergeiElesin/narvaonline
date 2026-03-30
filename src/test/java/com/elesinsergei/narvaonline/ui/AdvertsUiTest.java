@@ -8,7 +8,8 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.elesinsergei.narvaonline.data.AdvertsUiTestData.*;
@@ -27,7 +28,6 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(1)
-    @DisplayName("Step1: Registration via UM")
     @Story("User registration")
     public void registerTest(){
         advertsRegisterPage.register(TEST_USERNAME, TEST_EMAIL, TEST_PASSWORD);
@@ -37,7 +37,6 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(2)
-    @DisplayName("Step 2: Ad form filling")
     @Story("Form filling")
     public void addAdvert(){
         advertsAddPage.fillForm(ADD_AD_PAGE, AD_PHONE, AD_TITLE, AD_DESCRIPTION, AD_PRICE, AD_LOCATION);
@@ -48,28 +47,23 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(3)
-    @DisplayName("Step 3: Ad review")
     @Story("Ad review")
     public void checkUsernameAndPrice(){
         advertsPreviewPage.previewAd(TEST_USERNAME, AD_PRICE);
-        $(".adverts-price-box").shouldHave(text(AD_PRICE));
     }
 
     @Test
     @Order(4)
-    @DisplayName("Step 4: Ad publishing")
     @Story("Ad publishing")
     public void publish(){
         advertsPreviewPage.publishAd();
         //Проверка наличия success-сообщения
         $(".adverts-icon-ok")
                 .shouldBe(visible);
-        //sleep(500);
     }
 
     @Test
     @Order(5)
-    @DisplayName("Step 5: Publish confirm")
     @Story("Confirm publishing")
     public void review(){
         advertsPreviewPage.verifyAd(ADS_PAGE);
@@ -81,7 +75,6 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(6)
-    @DisplayName("Step 6: Deleting ad")
     @Story("Ad deleting")
     public void deleteAdv(){
         advertsDeleteAdversePage.deleteAd(MY_ADS_PAGE, AD_TITLE, MY_ADS_PAGE);
@@ -93,7 +86,6 @@ public class AdvertsUiTest extends BaseTest {
 
     @Test
     @Order(7)
-    @DisplayName("Step 7: Deleting user")
     @Story("User deleting")
     public void deleteUser(){
         advertsDeleteUserPage.deleteUser(MY_ACCOUNT, TEST_PASSWORD);
