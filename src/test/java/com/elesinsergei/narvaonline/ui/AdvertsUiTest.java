@@ -8,15 +8,14 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
-import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.elesinsergei.narvaonline.data.AdvertsUiTestData.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @Epic("UI Tests")
-@Feature("Adverse adding and deleting")
+@Feature("Adverse adding and deleting ")
 public class AdvertsUiTest extends BaseTest {
 
     HomePage homePage = new  HomePage();
@@ -50,6 +49,7 @@ public class AdvertsUiTest extends BaseTest {
     @Story("Ad review")
     public void checkUsernameAndPrice(){
         advertsPreviewPage.previewAd(TEST_USERNAME, AD_PRICE);
+        $(".adverts-price-box").shouldHave(text(AD_PRICE));
     }
 
     @Test

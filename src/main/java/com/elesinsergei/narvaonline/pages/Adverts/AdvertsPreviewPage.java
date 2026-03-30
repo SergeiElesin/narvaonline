@@ -26,6 +26,10 @@ public class AdvertsPreviewPage{
                 .shouldBe(enabled)
                 .click();
 
+        //Проверка наличия success-сообщения
+        /*$(".adverts-icon-ok")
+                .shouldBe(visible);*/
+
         //return new AdvertsPreviewPage();
         return this;
     }
