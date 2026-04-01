@@ -15,6 +15,9 @@ public class DashboardPage {
     private final SelenideElement postsBlogMenu = $("#menu-posts-blog");
     private final SelenideElement addNewBlogMenu = $(byText("Добавление поста в блог"));
 
+    private final SelenideElement postsEventMenu = $("#menu-posts-lsvr_event");
+    private final SelenideElement addNewEventMenu = $("a[href='post-new.php?post_type=lsvr_event']");
+
     public void goToNewPost() {
         postsMenu.hover();
         addNewPost.click();
@@ -28,5 +31,10 @@ public class DashboardPage {
     public void goToNewBlog(){
         postsBlogMenu.hover();
         addNewBlogMenu.click();
+    }
+
+    public void goToNewEvent(){
+        postsEventMenu.hover();
+        addNewEventMenu.click();
     }
 }
