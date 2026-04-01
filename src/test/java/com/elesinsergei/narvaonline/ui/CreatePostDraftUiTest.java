@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 @Epic("UI Tests")
 @Feature("Post creation")
-public class CreatePostUiTest extends BaseTest {
+public class CreatePostDraftUiTest extends BaseTest {
 
     @Test
     @Story("Post draft creation in admin dashboard")
@@ -38,6 +38,9 @@ public class CreatePostUiTest extends BaseTest {
 
         //5. Удаление черновика в корзину
         postEditorPage.deleteCurrentPost();
+
+        //6. Удаление из корзины
+        postEditorPage.deleteFromTrash();
 
         //6. Быстрое разлогинивание
         loginPage.fastLogout();
