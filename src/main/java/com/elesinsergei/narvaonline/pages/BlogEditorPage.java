@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.pages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import java.time.Duration;
@@ -32,6 +33,7 @@ public class BlogEditorPage {
 
 
     //Создание черновика блога
+    @Step("Blog draftCreation")
     public void createDraft(String title, String content) {
         titleField.setValue(title);
         chooseField.click();
@@ -41,6 +43,7 @@ public class BlogEditorPage {
     }
 
     // Метод для проверки, что черновик блога сохранился
+    @Step("Verify draft saved")
     public void verifyDraftSavedWithTimeout(int seconds) {
         $("[data-testid='snackbar']")
                 .shouldBe(visible, Duration.ofSeconds(seconds))
@@ -48,6 +51,7 @@ public class BlogEditorPage {
     }
 
     // Метод для удаления черновика блога в корзину
+    @Step("Delete blog in trash")
     public void deleteCurrentBlog() {
         // Если кнопка "В корзину" не видна (панель настроек закрыта), открываем её
         if (!moveToTrashButton.isDisplayed()) {
@@ -72,6 +76,7 @@ public class BlogEditorPage {
     }
 
     //Удаление навсегда
+    @Step("Delete blog forever")
     public void deleteFromTrash(){
         //Отправляем в корзину (как в предыдущем ответе)
         Selenide.open(BLOG_TRASH_URL);

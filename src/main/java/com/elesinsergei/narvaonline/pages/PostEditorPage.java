@@ -4,6 +4,7 @@ import static com.codeborne.selenide.Selenide.$;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.webdriver;
@@ -30,12 +31,14 @@ public class PostEditorPage{
     private final SelenideElement blogInTrash = $(By.xpath("//tr[contains(., 'Тестовый черновик через Selenide')]"));
 
     //Создание черновика
+    @Step("Post Draft creation")
     public void createDraft(String title) {
         titleField.setValue(title);
         saveDraftButton.click();
     }
 
     // Метод для проверки, что черновик сохранился
+    @Step("Post Draft saving verification")
     public void verifyDraftSavedWithTimeout(int seconds) {
         $("[data-testid='snackbar']")
                 .shouldBe(visible, Duration.ofSeconds(seconds))
@@ -43,6 +46,7 @@ public class PostEditorPage{
     }
 
     // Метод для удаления черновика в корзину
+    @Step("Post Draft deleting into trash")
     public void deleteCurrentPost() {
         // Если кнопка "В корзину" не видна (панель настроек закрыта), открываем её
         if (!moveToTrashButton.isDisplayed()) {
@@ -60,12 +64,11 @@ public class PostEditorPage{
                 .$("button.is-primary") // Синяя кнопка подтверждения
                 .shouldHave(text("В корзину"))
                 .click();
-
         // Ждем, пока нас перенаправит в список постов
         webdriver().shouldHave(urlContaining("edit.php"), Duration.ofSeconds(12));
-
     }
 
+    @Step("Post Draft deleting from trash")
     public void deleteFromTrash(){
         //Отправляем в корзину (как в предыдущем ответе)
         Selenide.open(BLOG_TRASH_URL);
