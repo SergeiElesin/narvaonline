@@ -1,6 +1,7 @@
 package com.elesinsergei.narvaonline.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 
@@ -21,7 +22,8 @@ public class LoginPage {
     //private final SelenideElement submitButton = $("#wp-submit");
     private final SelenideElement submitButton = $("#um-submit-btn");
 
-    private final SelenideElement adminMenu = $("#adminmenu"); // Элемент, который виден только после логина
+    // Элемент, который виден только после логина
+    private final SelenideElement adminMenu = $("#adminmenu");
 
     public LoginPage openPage() {
         //open("/wp-login.php");
@@ -29,8 +31,8 @@ public class LoginPage {
         return this;
     }
 
+    @Step ("Login")
     public void login(String user, String password) {
-
         // 1. Заполняем поля явно
         loginField.shouldBe(visible, Duration.ofSeconds(10)).setValue(user);
         //sleep(250);
@@ -40,6 +42,7 @@ public class LoginPage {
         //actions().moveToElement($("#um-submit-btn")).click().perform();
     }
 
+    @Step("Login confirmation")
     public void shouldBeLoggedIn() {
         adminMenu.shouldBe(visible, Duration.ofSeconds(15)); // Если меню админки видно — логин прошел успешно
     }
@@ -58,6 +61,7 @@ public class LoginPage {
     }*/
 
     //Разлогинивание быстрое - через очистку сессии
+    @Step("Fast logout")
     public void fastLogout() {
         clearBrowserCookies();
         refresh();

@@ -20,7 +20,6 @@ public class PageEditorPage {
     private final SelenideElement publishPanel = $(".editor-post-publish-panel");
     private final SelenideElement publishButton = $(".editor-post-publish-button__button");
     private final SelenideElement publishButtonFinal = $(".editor-post-publish-button");
-    //private final SelenideElement datePicker= $("#lsvr_event_end_date_utc_input + span input");
 
     private final String PAGE_TRASH_URL = "/wp-admin/edit.php?post_status=trash&post_type=page";
     private final String PAGE_LIST_URL = "/wp-admin/edit.php?post_type=page";
@@ -36,15 +35,15 @@ public class PageEditorPage {
         contentField.setValue(content);
         titleField.click();
 
-
+/*
         // Устанавливаем изображение страницы - последний из галереи
         $(byText("Установить изображение страницы")).click();
-        //switchTo().window(1);
+        //Выбираем первый файл
         $(".attachment.save-ready").shouldBe(visible).click();
+        //Нажимаем кнопку Установить изображение страницы
         $(".media-button").shouldBe(enabled).click();
+*/
 
-
-/*
         // Устанавливаем изображение страницы - отдельный файл
         //$(".editor-post-featured-image__toggle").click();
         $(byText("Установить изображение страницы")).click();
@@ -54,7 +53,6 @@ public class PageEditorPage {
         $("input[type='file']").uploadFile(new File("src/test/resources/img/my_photo.png"));
         // Кнопка "Установить изображение записи" в модальном окне
         $(".media-toolbar-primary .media-button-select").shouldBe(enabled).click();
- */
 
     }
 
@@ -90,7 +88,6 @@ public class PageEditorPage {
         pageInAdmin.hover().$(".submitdelete").click();
     };
 
-    ////////TODO
     @Step("Check page deletion on frontend")
     public void checkDelete() {
         open(PAGE_LIST_URL);

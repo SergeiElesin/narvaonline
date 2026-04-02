@@ -4,6 +4,7 @@ import com.elesinsergei.narvaonline.BaseTest;
 import com.elesinsergei.narvaonline.pages.DashboardPage;
 import com.elesinsergei.narvaonline.pages.LoginPage;
 import com.elesinsergei.narvaonline.pages.PageEditorPage;
+import com.elesinsergei.narvaonline.utils.Utils;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
@@ -24,6 +25,7 @@ public class CreatePageUiTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         DashboardPage dashboardPage = new DashboardPage();
         PageEditorPage pageEditorPage = new PageEditorPage();
+        Utils utils = new Utils();
 
         // 1. Логин
         loginPage.openPage().login(USER_NAME, PASSWORD);
@@ -49,7 +51,10 @@ public class CreatePageUiTest extends BaseTest {
         //8. Удаление страницы из корзины
         pageEditorPage.deleteFromTrash();
 
-        //9. Быстрое разлогинивание
+        //9. Удаление тестового изображения из галереи
+        utils.deleteTestImg();
+
+        //10. Быстрое разлогинивание
         loginPage.fastLogout();
 
     }
