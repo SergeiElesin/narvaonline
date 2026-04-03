@@ -12,6 +12,10 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * CreatePageUiTest - test class for page
+ */
+
 @Epic("UI Tests")
 @Feature("Page creation")
 public class CreatePageUiTest extends BaseTest {
@@ -27,34 +31,34 @@ public class CreatePageUiTest extends BaseTest {
         PageEditorPage pageEditorPage = new PageEditorPage();
         Utils utils = new Utils();
 
-        // 1. Логин
+        // 1. Login
         loginPage.openPage().login(USER_NAME, PASSWORD);
 
-        // 2. Навигация к созданию персоны
+        // 2. Go to page creation
         dashboardPage.goToNewPage();
 
-        // 3. Создание страницы
+        // 3. Page creation
         pageEditorPage.create("Test Page via Selenide", "Test Page content via Selenide");
 
-        //4. Публикация страницы
+        //4. Page publishing
         pageEditorPage.publish();
 
-        //5. Проверка публикации страницы
+        //5. Check page publishing
         pageEditorPage.checkPublish();
 
-        //6. Удаление страницы в корзину
+        //6. Removal page into trash
         pageEditorPage.deleteCurrentPage();
 
-        //7. Проверка удаления персоны на фронтенде
+        //7. Check of removal on frontend
         pageEditorPage.checkDelete();
 
-        //8. Удаление страницы из корзины
+        //8. Permanent removal page from trash
         pageEditorPage.deleteFromTrash();
 
-        //9. Удаление тестового изображения из галереи
+        //9. Removing a test image from the gallery
         utils.deleteTestImg();
 
-        //10. Быстрое разлогинивание
+        //10. Fast logout
         loginPage.fastLogout();
 
     }

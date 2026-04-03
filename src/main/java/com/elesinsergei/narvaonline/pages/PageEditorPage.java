@@ -12,6 +12,10 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * PageEditorPage contains data and methods for Page creating, testing and removal
+ */
+
 public class PageEditorPage {
 
     private final SelenideElement titleField = $(".editor-post-title__input");
@@ -24,10 +28,10 @@ public class PageEditorPage {
     private final String PAGE_TRASH_URL = "/wp-admin/edit.php?post_status=trash&post_type=page";
     private final String PAGE_LIST_URL = "/wp-admin/edit.php?post_type=page";
 
-    //Персона в админке
+    //Person in Admin Panel
     private final SelenideElement pageInAdmin = $(By.xpath("//tr[contains(., 'Test Page via Selenide')]"));
 
-    //Создание страницы
+    //Page creation
     @Step("Page Creation")
     public void create(String title, String content) {
         titleField.setValue(title);
@@ -36,49 +40,49 @@ public class PageEditorPage {
         titleField.click();
 
 /*
-        // Устанавливаем изображение страницы - последний из галереи
+        // Set post thumbnail - last in gallery
         $(byText("Установить изображение страницы")).click();
-        //Выбираем первый файл
+        //Choose first image in list
         $(".attachment.save-ready").shouldBe(visible).click();
-        //Нажимаем кнопку Установить изображение страницы
+        //Click the Set Page Image button
         $(".media-button").shouldBe(enabled).click();
 */
 
-        // Устанавливаем изображение страницы - отдельный файл
+        // Set post thumbnail - file
         //$(".editor-post-featured-image__toggle").click();
         $(byText("Установить изображение страницы")).click();
-        // Переключаемся на вкладку "Загрузить файлы"
+        // Switch to the "Upload files" tab
         $(byText("Загрузить файлы")).click();
-        // Находим скрытый input типа file и отправляем туда путь к картинке
+        // Find a hidden input of the file type and send the path to the image there.
         $("input[type='file']").uploadFile(new File("src/test/resources/img/my_photo.png"));
-        // Кнопка "Установить изображение записи" в модальном окне
+        // "Set Post Image" button in the modal window
         $(".media-toolbar-primary .media-button-select").shouldBe(enabled).click();
 
     }
 
     @Step("Publishing page")
     public void publish() {
-        // 1. Жмем кнопку опубликовать
+        // 1. Click the publish button
         publishButton.click();
-        // 2. Ждем, пока панель предпросмотра/публикации станет видимой
+        // 2. Wait until the preview/publish panel becomes visible
         publishPanel.shouldBe(visible);
-        // 3. Нажимаем финальную кнопку "Опубликовать" в сайдбаре
+        // 3. Click the final "Publish" button in the sidebar
         publishButtonFinal.shouldBe(visible, enabled).click();
-        // 4. Проверка успеха
+        // 4. Success check
         $("[data-testid='snackbar']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Страница опубликована."));;
     }
 
     @Step("Check Page Publishing")
     public void checkPublish() {
-        //Открываем страницу в новом окне
+        //Open page in new window - second window (browser tab)
         $(withText("Просмотреть страницу")).click();
-        //Переключаемся на второе окно (страницу)
+        //Switch to second window (browser tab)
         switchTo().window(1);
-        //Проверяем наличие тайтла
+        //Test title exist
         $(byText("Test Page content via Selenide")).shouldBe(visible);
-        //закрываем второе окно
+        //Close second window (browser tab)
         closeWindow();
-        //Переключаемся на первое окно (админку)
+        //Switch to first window (browser tab with opened admin panel)
         switchTo().window(0);
     }
 
@@ -100,8 +104,5 @@ public class PageEditorPage {
         open(PAGE_TRASH_URL);
         pageInAdmin.hover().$(".delete").click();
     }
-
-
-
 
 }

@@ -6,6 +6,10 @@ import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * Utils contains utility data and methods for framework
+ */
+
 public class Utils{
     public static final String PAGE_UPLOAD_URL = "/wp-admin/upload.php";
 

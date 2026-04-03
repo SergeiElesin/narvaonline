@@ -2,11 +2,16 @@ package com.elesinsergei.narvaonline.config;
 
 import org.aeonbits.owner.Config;
 
+/**
+ * Reading application.properties file
+ * Getting properties
+ */
+
 @Config.LoadPolicy(Config.LoadType.MERGE)
 @Config.Sources({
-        "system:env",                     // 1. Сначала ищем в переменных окружения
-        "system:properties",              // 2. Потом в системных пропертях (-Dkey=value)
-        "classpath:application.properties" // 3. И только потом в файле
+        "system:env",                     // 1. First - searching in environment variables
+        "system:properties",              // 2. Second - searching in subsystem properties (-Dkey=value)
+        "classpath:application.properties" // 3. At last - searching in file application.properties
 })
 public interface ApplicationConfig extends Config {
 

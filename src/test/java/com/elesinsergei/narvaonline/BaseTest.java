@@ -13,6 +13,9 @@ import io.restassured.http.ContentType;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeAll;
 
+/**
+ * Class BaseTest contains framework configuration: Selenide, Rest Assured, Allure
+ */
 
 public class BaseTest {
 
@@ -32,7 +35,7 @@ public class BaseTest {
 
     @BeforeAll
     public static void setup() {
-        // 1. Настройка Selenide
+        // 1. Selenide settings
         Configuration.baseUrl = BASE_URL;
         //Configuration.baseUrl = BASE_URL_PROD;
         Configuration.browser = "chrome";
@@ -40,22 +43,22 @@ public class BaseTest {
         //Configuration.headless = false; // Поставь true для запуска в CI/CD без GUI
         Configuration.headless = BROWSER_HEADLESS; // Поставь true для запуска в CI/CD без GUI
 
-        // 2. Подключаем слушатели Allure для автоматических скриншотов и логов
+        // 2. Include Allure listener for automatic screenshots and logs
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)
                 .savePageSource(true));
 
-        // 3. Настройка Rest Assured
-        //RestAssured.baseURI = "https://narva-online.ee/wp-json/wp/v2";
+        // 3. Rest Assured settings
         RestAssured.baseURI = BASE_URL_API;
         //RestAssured.baseURI = BASE_URL_API_PROD;
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
-                // 2. Добавляем настройку игнорирования сертификатов (для OpenServer)
+                // 2. OpenServer: add certificate ignorance setting
                 .setConfig(RestAssured.config().sslConfig(new SSLConfig().relaxedHTTPSValidation()))
-                // Глобально добавляем Basic Auth (preemptive)
+                // Add Global Basic Auth (preemptive)
                 .setAuth(RestAssured.preemptive().basic(USER_NAME, APP_PASSWORD))
-                .addFilter(new AllureRestAssured()) // Автоматически добавляет API запросы в отчет Allure
+                // Auto adding API requests into Allure Report
+                .addFilter(new AllureRestAssured())
                 .build();
     }
 }

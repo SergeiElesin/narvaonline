@@ -4,12 +4,17 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 
+import java.io.File;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+
+/**
+ * EventEditorPage contain data and methods for event creation, testing and removal
+ */
 
 public class EventEditorPage {
 
@@ -24,29 +29,41 @@ public class EventEditorPage {
     private final String EVENT_TRASH_URL = "/wp-admin/edit.php?post_status=trash&post_type=lsvr_event";
     private final String EVENT_LIST_URL = "/wp-admin/edit.php?post_type=lsvr_event";
 
-    //Событие в админке
+    //Event in the admin panel
     private final SelenideElement eventInAdmin = $(By.xpath("//tr[contains(., 'Test Event via Selenide')]"));
 
-    //Создание события
+    //Event creation
     @Step("Event Creation")
     public void createEvent(String title, String content) {
         titleField.setValue(title);
         chooseField.click();
         contentField.setValue(content);
 
-        //Устанавливаем дату окончания события
+        //Set end date
         datePicker.setValue("2030-04-15");
+
+        titleField.click();
+
+        // Set event thumbnail - file
+        //$(".editor-post-featured-image__toggle").click();
+        $(byText("Установить изображение записи")).click();
+        // Switch to the "Upload files" tab
+        $(byText("Загрузить файлы")).click();
+        // Find a hidden input of the file type and send the path to the image there.
+        $("input[type='file']").uploadFile(new File("src/test/resources/img/my_photo.png"));
+        // "Set Post Image" button in the modal window
+        $(".media-toolbar-primary .media-button-select").shouldBe(enabled).click();
     }
 
     @Step("Publishing event")
     public void publish() {
-        // 1. Жмем кнопку опубликовать
+        // 1. Click the publish button
         publishButton.click();
-        // 2. Ждем, пока панель предпросмотра/публикации станет видимой
+        // 2. Wait until the preview/publish panel becomes visible
         publishPanel.shouldBe(visible);
-        // 3. Нажимаем финальную кнопку "Опубликовать" в сайдбаре
+        // 3. Click the final "Publish" button in the sidebar
         publishButtonFinal.shouldBe(visible, enabled).click();
-        // 4. Проверка успеха
+        // 4. Success check
         $("[data-testid='snackbar']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Запись опубликована."));;
     }
 

@@ -38,7 +38,7 @@ public class PostClient {
     //Удаление поста
     public void deletePost(Integer id) {
         given()
-                //.filter(new io.qameta.allure.restassured.AllureRestAssured()) // чтобы удаление тоже попало в отчет
+                .filter(new io.qameta.allure.restassured.AllureRestAssured()) // чтобы удаление тоже попало в отчет
                 .when()
                 .delete("/posts/" + id + "?force=true") // force=true — это важно для WP, чтобы не в корзину, а сразу
                 .then()

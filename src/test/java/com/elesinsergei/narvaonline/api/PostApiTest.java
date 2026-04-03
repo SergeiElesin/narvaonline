@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.*;
 
+/**
+ * API test - getting list of posts
+ */
+
 @Epic("API Tests")
 @Feature("Posts API")
 @Owner("Sergei Elesin")
@@ -24,9 +28,9 @@ public class PostApiTest extends BaseTest {
         Response response = postClient.getPosts();
 
         response.then()
-                .statusCode(200) // Проверяем статус ответа
-                .contentType("application/json") // Проверяем, что вернулся JSON
-                .body("size()", greaterThan(0)) // Проверяем, что в списке есть хотя бы один пост
-                .body("title.rendered", hasItem(notNullValue())); // Проверяем, что у постов есть заголовки
+                .statusCode(200) // Check request status
+                .contentType("application/json") // Chech, that returned JSON
+                .body("size()", greaterThan(0)) // Check, that at least one post in list exists
+                .body("title.rendered", hasItem(notNullValue())); // Check, that posts has titles
     }
 }

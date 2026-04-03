@@ -6,6 +6,10 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 
+/**
+ * Adverts - adding advertise by filling form
+ */
+
 public class AdvertsAddPage {
 
     public AdvertsAddPage fillForm(
@@ -16,62 +20,58 @@ public class AdvertsAddPage {
             String ad_price,
             String add_location){
 
-        // Если после регистрации не редирект — открываем форму явно
+        // open page with form for adding advertise
         open(add_ad_page);
 
-        //Номер телефона
+        //Phone number
         $("input[name='adverts_phone']")
                 .shouldBe(visible)
                 .setValue(ad_phone);
         sleep(1000);
 
-        // Заголовок объявления
+        // Adverts title
         $("input[name='post_title']")
                 .shouldBe(visible)
                 .setValue(ad_title);
         sleep(1000);
 
-        //Рубрика - выпадающий список
+        //Category - dropdown
         $("#advert_category").shouldBe(visible).click();
-        //$(withText("АВТОМОБИЛИ")).click();
         $$(".adverts-option-depth-0").findBy(text("АВТОМОБИЛИ")).click();
         sleep(1000);
 
-        //Галерея - добавляем изображение
+        //Gallery - adding image
         $("input[type='file']").uploadFromClasspath("img/my_photo.png");
 
-        // Описание (обычно textarea или wp-editor)
-        // Редактор находится внутри iframe
-        // Переключаемся во фрейм (по ID или индексу)
+        // Decription (textarea or  wp-editor)
+        // Editor inside of iframe
+        // Switch in frame ( using ID or index)
         switchTo().frame("post_content_ifr");
-        // Находим body внутри фрейма и вводим текст
+        // Search for body inside frame and enter text
         $(".mce-content-body").setValue(ad_description);
-        // Возвращаемся обратно к основному контенту страницы
+        // Return to default content
         switchTo().defaultContent();
         sleep(1000);
 
-        // Цена
+        // Price
         $("input[name='adverts_price']")
                 .shouldBe(visible)
                 .setValue(ad_price);
         sleep(1000);
 
-        // Price (select или radio) — при необходимости раскомментировать
-        // $("select[name='adverts_category']").selectOption("Электроника");
-
-        //Местоположение
+        //Location
         $("input[name='adverts_location']")
                 .shouldBe(visible)
                 .setValue(add_location);
         sleep(1000);
 
-        // Кнопка «Предпросмотр»
+        // Button «Preview»
         $("input[name='submit']")
                 .shouldBe(enabled)
                 .click();
         sleep(1000);
 
-        // Убеждаемся, что открылась страница предпросмотра
+        // Ensure that preview page is open
         $(".adverts-show-contact")
                 .shouldBe(visible);
 

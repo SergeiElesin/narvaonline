@@ -6,6 +6,10 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
+/**
+ * DashboardPage contains data and methods, that used on wordpress dashboard
+ */
+
 public class DashboardPage {
     //Post
     private final SelenideElement postsMenu = $("#menu-posts"); // Меню "Записи"

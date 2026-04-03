@@ -6,40 +6,44 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$$;
 
+/**
+ * Adverts - Delete advertise
+ */
+
 public class AdvertsDeleteAdversePage {
 
     public AdvertsDeleteAdversePage deleteAd(String my_ads_page, String ad_title, String ads_page){
 
-        // Переходим в личный кабинет / управление объявлениями
+        // Go to personal account / ad management
         open(my_ads_page);
 
-        // Находим наше объявление в списке и кликаем «Удалить»
+        // Find ad in list and click “Delete”
         $$(".advert-manage-item")
                 .findBy(text(ad_title))
                 .$("a[title='Удалить']")
                 .shouldBe(visible)
                 .click();
 
-        // Подтверждаем удаление в диалоге
+        // Confirm the deletion in the dialog
         $(".adverts-manage-action-delete-yes").shouldHave(text("Да"))
                 .shouldBe(visible)
                 .click();
 
-        //Сообщение об успешном удалении
+        //Successful deletion message
         $(".advert-manage-deleted > strong")
                 .shouldHave(text(ad_title))
                 .shouldBe(visible);
 
-        //OK - нажимаем
+        //OK - click
         $(byText("OK")).click();
         sleep(500);
 
-        // Проверяем, что объявление исчезло из списка
+        // Check that the ad has disappeared from list
         $$(".advert-manage-item")
                 .findBy(text(ad_title))
                 .shouldNotBe(visible);
 
-        //Проверяем отсутствие на публичной странице объявлений
+        //Check for the absence of ads on the public page
         open(ads_page);
         /*
         $$("a.advert-link-wrap")

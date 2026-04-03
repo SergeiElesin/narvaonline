@@ -3,6 +3,9 @@ package com.elesinsergei.narvaonline.data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class AdvertsUiTestData contains data, used in AdvertsUiTest for testing adverts adding functionality on frontend
+ */
 public class AdvertsUiTestData {
 
     //Test endpoints

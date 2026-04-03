@@ -17,6 +17,9 @@ import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * PostHybridTest contains tests for Posts
+ */
 
 @Epic("E2E Tests")
 @Feature("Authentication, post creation, check post existing, post delete")
@@ -33,9 +36,8 @@ public class PostHybridTest extends BaseTest {
     @DisplayName("Successful login to the admin panel")
     @Step("Successful E2E Tests")
     public void shouldSeeCreatedPostOnFrontEnd() {
-        //String postTitle = "E2E Post " + System.currentTimeMillis();
 
-        // API: Создаем пост (авторизация произойдет внутри метода)
+        // API: Create post (authorization within method)
         Post postRequest = Post.builder()
                 .title(postTitle)
                 .content("Check this out on UI!")
@@ -44,21 +46,21 @@ public class PostHybridTest extends BaseTest {
 
         createdPostId = postClient.createPost(postRequest).path("id");
 
-        // UI: Проверка на наличие тайтла
+        // UI: Checking for title is visible
         homePage.openPage().verifyPostTitleIsVisible(postTitle);
     }
 
     @AfterEach
     public void cleanUp() {
-        // Проверяем, что ID существует (пост был успешно создан)
+        // Check that the ID exists (the post was successfully created)
         if (createdPostId != null) {
-            // Удаляем пост без лишних параметров, так как логин/пароль уже внутри клиента
+            // Delete the post
             postClient.deletePost(createdPostId);
-            //Перезагружаем страницу с принудительной очисткой кеша
+            //Reload the page and force clear the cache.
             String currentUrl = WebDriverRunner.url();
             //open(currentUrl + "?nocache=" + System.currentTimeMillis());
             open(currentUrl + "?nocache=");
-            // Проверяем отсутствие поста
+            // Checking for the absence of a post
             $(byText(postTitle)).shouldNot(exist);
             System.out.println("Cleanup: Post with ID " + createdPostId + " was deleted.");
 

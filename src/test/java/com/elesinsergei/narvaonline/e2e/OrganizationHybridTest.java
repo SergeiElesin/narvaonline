@@ -7,6 +7,7 @@ import com.elesinsergei.narvaonline.api.OrganizationClient;
 import com.elesinsergei.narvaonline.pages.DashboardPage;
 import com.elesinsergei.narvaonline.pages.LoginPage;
 import com.elesinsergei.narvaonline.pages.OrganizationEditorPage;
+import com.elesinsergei.narvaonline.utils.Utils;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -22,6 +23,10 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * OrganizationHybridTest contains tests for organization
+ */
+
 @Epic("E2E Tests")
 @Feature("Organization creation and deletion")
 public class OrganizationHybridTest extends BaseTest {
@@ -29,32 +34,35 @@ public class OrganizationHybridTest extends BaseTest {
     DashboardPage dashboardPage = new DashboardPage();
     OrganizationEditorPage orgEditorPage = new OrganizationEditorPage();
     OrganizationClient orgClient = new OrganizationClient();
+    Utils utils = new Utils();
 
     @Test
     @DisplayName("Creation and complete deletion of an organization")
     @Story("Organization creating and full deleting")
     void shouldCreateAndForceDeleteOrganization() {
 
-        //Нужно, если данные поста добавляем через POJO
+        //This is necessary if we add post data via POJO.
         /*Organization organization = Organization.builder()
                 .title("Elite Dev Studio " + System.currentTimeMillis())
                 .description("Best solutions on Java")
                 .build();*/
 
-        // 1. Логин
+        //1. Login
         loginPage.openPage().login(USER_NAME, PASSWORD);
 
-        // 2. Переход к созданию (через прямое URL или меню)
+        //2. Transition to the creation of an organization
         dashboardPage.goToNewOrg();
 
-        // 3. Создание и публикация через POJO
+        //3. Creating and publishing via POJO
         //orgEditorPage.fillOrgData(organization).publish();
 
-        // 3. Создание и публикация через админ-панель
+        //4. Organization creation
         orgEditorPage.createOrganization("Elite Dev Studio", "Best solutions on Java");
+
+        //5. Organization publication
         orgEditorPage.publish();
 
-        // 4. Получаем ID созданного поста из URL (нужно для его удаления)
+        //6. Get the ID of the created post from the URL (needed for deleting it via API)
         //int postId = Integer.parseInt(WebDriverRunner.url().replaceAll(".*post=(\\d+).*", "$1"));
         int postId = Optional.ofNullable(WebDriverRunner.url())
                 .map(url -> {
@@ -65,24 +73,27 @@ public class OrganizationHybridTest extends BaseTest {
                 .orElseThrow(() -> new RuntimeException("Can't get postId from URL"));
 
 
-        // 5. Проверка наличия организации фронтенде
+        //7. Checking the presence of organization on front-end
         open("/katalog-organizatsij/");
         $(byText("Elite Dev Studio")).shouldBe(visible);
-        //Берем тайтл из POJO
+        //Getting a title from a POJO
         //$(byText(organization.getTitle())).shouldBe(visible);
 
-        // 6. Очистка: Удаляем организацию через API "навсегда"
+        //8. Cleanup: Permanently delete an organization via the API
         orgClient.deleteOrgForce(postId);
+
+        //9. Removing a test image from the gallery
+        utils.deleteTestImg();
+
+        //10. Final test: post is gone
+        refresh();
+        //Getting a title from a POJO
+        //$(byText(organization.getTitle())).shouldNot(exist);
+        $(byText("Elite Dev Studio")).shouldNot(exist);
     }
 
     @AfterEach
     public void cleanUp() {
-        // 7. Финальная проверка: пост исчез
-        refresh();
-        $(byText("Elite Dev Studio")).shouldNot(exist);
-        //Берем тайтл из POJO
-        //$(byText(organization.getTitle())).shouldNot(exist);
-
         loginPage.fastLogout();
     }
 }

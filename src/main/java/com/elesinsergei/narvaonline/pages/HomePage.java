@@ -8,27 +8,25 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
+/**
+ * HomePage contains methods used on Home Page
+ */
+
 public class HomePage {
-
-    // Используем селектор для заголовка (обычно это h1 или название сайта)
-    //private final SelenideElement mainHeader = $("h1.entry-title");
-
-    // Селектор для заголовка поста на главной или странице поста
-   //private SelenideElement postTitleHeader = $(".lsvr-pressville-post-grid__post-title-link");
 
     public HomePage openPage() {
         open("/"); // Откроет baseUrl, который мы прописали в BaseTest
         return this;
     }
 
-    //проверяем тайтл страницы
+    //Check page Title
     public void verifyPageTitle(String expectedTitle) {
         webdriver().shouldHave(WebDriverConditions.title(expectedTitle), Duration.ofSeconds(10));
     }
 
-    //проверяем видимость заголовка поста в списке постов
+    //Checking  visibility of the post title in the list of posts
     public void verifyPostTitleIsVisible(String expectedTitle) {
-        // Ищем среди всех заголовков тот, у которого текст совпадает с нашим postTitle
+        // Search among all the headings for the one whose text matches our postTitle
         $$(".lsvr-pressville-post-grid__post-title-link")
                 .findBy(text(expectedTitle))
                 .shouldBe(visible);

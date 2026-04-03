@@ -56,6 +56,7 @@ dependencies {
     // Allure tools integration
     testImplementation("io.qameta.allure:allure-selenide:${allureVersion}")
     testImplementation("io.qameta.allure:allure-rest-assured:${allureVersion}")
+    implementation("io.qameta.allure:allure-rest-assured:${allureVersion}")
     testImplementation("io.qameta.allure:allure-junit5:${allureVersion}")
     implementation("io.qameta.allure:allure-assertj:${allureVersion}")
 

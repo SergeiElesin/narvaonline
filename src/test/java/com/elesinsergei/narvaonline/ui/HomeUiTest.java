@@ -6,6 +6,10 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+/**
+ * HomeUiTest - test class for Home page
+ */
+
 @Epic("UI Tests")
 @Feature("Main Page")
 @Owner("Sergei Elesin")
