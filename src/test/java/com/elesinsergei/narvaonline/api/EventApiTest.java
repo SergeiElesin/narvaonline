@@ -41,7 +41,7 @@ public class EventApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that posts has titles
     }
 
-    //Event creation, test by title, post removal
+    //Event creation, test by title, event removal
     @Test
     @Story("Event creation, test, removal via APi")
     @DisplayName("Event creation and removal via API")
@@ -52,13 +52,12 @@ public class EventApiTest extends BaseTest {
         Event eventRequest = Event.builder()
                 .title(eventTitle)
                 .content(eventContent)
-                //.address(orgAddress)
                 .status("publish")
                 .build();
 
         createdEventId = eventClient.createEvent(eventRequest).path("id");
 
-        //2. Checking org existing by title
+        //2. Checking event existing by title
         Response response = eventClient.getEvents();
         //  Getting list of titles
         List<String> titles = response.jsonPath().getList("title.rendered");
@@ -77,8 +76,7 @@ public class EventApiTest extends BaseTest {
         // Updated title list
         List<String> orgTitles = responseAfterDel.jsonPath().getList("title.rendered");
         Assertions.assertFalse(orgTitles.contains(eventTitle),
-                "Error: Organization '" + eventTitle + "' is still in the list!");
+                "Error: Event '" + eventTitle + "' is still in the list!");
     }
-
 
 }

@@ -1,0 +1,52 @@
+package com.elesinsergei.narvaonline.api;
+
+import com.elesinsergei.narvaonline.models.Person;
+import io.qameta.allure.Step;
+import io.restassured.response.Response;
+
+import static io.restassured.RestAssured.given;
+
+public class PersonClient {
+
+    private static final String PERSON_ENDPOINT = "/lsvr_person/";
+
+    //Getting person list
+    @Step("Getting persons")
+    public Response getPersons() {
+        return given()
+                //Cancel global authorization in BaseTest
+                .auth().none()
+                .when()
+                .get(PERSON_ENDPOINT)
+                .then()
+                .extract().
+                response();
+    }
+
+    //Person creation
+    @Step("Person creation")
+    public Response createPerson(Person person) {
+        return given()
+                // Authorization:
+                //.auth().preemptive().basic(username, appPassword)
+                .contentType("application/json") // Обязательно добавь это!
+                .body(person)
+                .log().all() // Выведет запрос в консоль
+                .when()
+                .post(PERSON_ENDPOINT)
+                .then()
+                .log().all() // Выведет ответ (посмотри, какой там status)
+                .extract().response();
+    }
+
+    //Person removing (ID)
+    @Step("Deleting an person via API (ID: {id})")
+    public void deletePerson(int id) {
+        given()
+                .when()
+                // force=true - permanent delete (not into trash)
+                .delete(PERSON_ENDPOINT + id + "?force=true")
+                .then()
+                .statusCode(200);
+    }
+}

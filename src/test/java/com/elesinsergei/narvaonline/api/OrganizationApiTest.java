@@ -42,7 +42,7 @@ public class OrganizationApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that posts has titles
     }
 
-    //Organization creation, test by title, post removal
+    //Organization creation, test by title, org removal
     @Test
     @Story("Organization creation, test, removal via APi")
     @DisplayName("Organization creation and removal via API")
