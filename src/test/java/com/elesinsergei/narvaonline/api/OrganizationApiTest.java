@@ -2,10 +2,8 @@ package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.BaseTest;
 import com.elesinsergei.narvaonline.models.Organization;
-import com.elesinsergei.narvaonline.models.Post;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +20,7 @@ import static org.hamcrest.Matchers.*;
 @Feature("Organizations API")
 public class OrganizationApiTest extends BaseTest {
 
-    String orgTitle = "API Org " + System.currentTimeMillis();
+    String orgTitle = "API Org title" + System.currentTimeMillis();
     String orgContent = "API Org content " + System.currentTimeMillis();
     String orgAddress = "API Org address " + System.currentTimeMillis();
     Integer createdOrgId;

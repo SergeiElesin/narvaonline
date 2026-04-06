@@ -1,7 +1,6 @@
 package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.Organization;
-import com.elesinsergei.narvaonline.models.Post;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
