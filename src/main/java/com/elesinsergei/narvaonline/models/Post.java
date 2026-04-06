@@ -1,5 +1,6 @@
 package com.elesinsergei.narvaonline.models;
 
+import com.codeborne.selenide.conditions.webdriver.Title;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -17,5 +18,5 @@ public class Post {
     private Integer id;
     private String title;
     private String content;
-    private String status; // "publish" или "draft"
+    private String status;
 }

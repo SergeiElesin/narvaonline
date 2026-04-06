@@ -1,7 +1,10 @@
 package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.Post;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
+
+import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
@@ -9,10 +12,12 @@ public class PostClient {
 
     private static final String POSTS_ENDPOINT = "/posts";
 
-    //Получение списка постов
+    //Getting post list
+    @Step("Getting posts")
     public Response getPosts() {
         return given()
-                .auth().none() // Отменяет глобальную авторизацию из BaseTest для этого запроса
+                //Cancel global authorization in BaseTest
+                .auth().none()
                 .when()
                 .get(POSTS_ENDPOINT)
                 .then()
@@ -20,10 +25,11 @@ public class PostClient {
                 response();
     }
 
-    //Создание поста
+    //Post creation
+    @Step("Post creation")
     public Response createPost(Post post) {
         return given()
-                // Магия авторизации здесь:
+                // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json") // Обязательно добавь это!
                 .body(post)
@@ -35,7 +41,8 @@ public class PostClient {
                 .extract().response();
     }
 
-    //Удаление поста
+    //Post removal via ID
+    @Step("Post removal")
     public void deletePost(Integer id) {
         given()
                 .filter(new io.qameta.allure.restassured.AllureRestAssured()) // чтобы удаление тоже попало в отчет
