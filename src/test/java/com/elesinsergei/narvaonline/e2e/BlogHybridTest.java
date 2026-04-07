@@ -2,9 +2,8 @@ package com.elesinsergei.narvaonline.e2e;
 
 import com.codeborne.selenide.WebDriverRunner;
 import com.elesinsergei.narvaonline.BaseTest;
-import com.elesinsergei.narvaonline.api.PostClient;
-import com.elesinsergei.narvaonline.models.Post;
-import com.elesinsergei.narvaonline.pages.HomePage;
+import com.elesinsergei.narvaonline.api.BlogClient;
+import com.elesinsergei.narvaonline.models.Blog;
 import com.elesinsergei.narvaonline.pages.LoginPage;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -13,58 +12,61 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 /**
- * PostHybridTest contains tests for Posts
+ * PostHybridTest contains tests for Blog post creation and deletion
  */
 
 @Epic("E2E Tests")
-@Feature("Authentication, post creation, check post existing, post delete")
-public class PostHybridTest extends BaseTest {
+@Feature("Authentication, blog post creation, check blog post existing, blog post delete")
+public class BlogHybridTest extends BaseTest {
 
-    private final String postTitle = "E2E Post title" + System.currentTimeMillis();
+    private final String BLOG_URL = "/my-blog/";
+    private final String blogTitle = "E2E Blogpost title" + System.currentTimeMillis();
     private final String blogContent = "E2E Blogpost content " + System.currentTimeMillis();
-    Integer createdPostId;
+    private Integer createdBlogId;
 
-    PostClient postClient = new PostClient();
-    HomePage homePage = new HomePage();
+    BlogClient blogClient = new BlogClient();
     LoginPage loginPage = new LoginPage();
 
     @Test
-    @Story("Post creation via APi, see post via UI")
-    @DisplayName("Successful post creation via APi")
-    @Step("Create and check post")
-    public void shouldSeeCreatedPostOnFrontEnd() {
+    @Story("Blog creation via APi, see post via UI")
+    @DisplayName("Successful blog post creation via APi")
+    @Step("Create and check blog")
+    public void shouldSeeCreatedBlogPostOnFrontEnd() {
 
-        // API: Create post (authorization within method)
-        Post postRequest = Post.builder()
-                .title(postTitle)
+        // API: Create blog (authorization within method)
+        Blog blogRequest = Blog.builder()
+                .title(blogTitle)
                 .content(blogContent)
                 .status("publish")
                 .build();
 
-        createdPostId = postClient.createPost(postRequest).path("id");
+        createdBlogId = blogClient.createBlogPost(blogRequest).path("id");
 
         // UI: Checking for title is visible
-        homePage.openPage().verifyPostTitleIsVisible(postTitle);
+        open(BLOG_URL);
+        $(byText(blogTitle)).should(exist);
     }
 
     @AfterEach
     public void cleanUp() {
         // Check that the ID exists (the post was successfully created)
-        if (createdPostId != null) {
+        if (createdBlogId != null) {
             // Delete the post
-            postClient.deletePost(createdPostId);
+            blogClient.deleteBlogPost(createdBlogId);
             //Reload the page and force clear the cache.
             String currentUrl = WebDriverRunner.url();
             //open(currentUrl + "?nocache=" + System.currentTimeMillis());
             open(currentUrl + "?nocache=");
             // Checking for the absence of a post
-            $(byText(postTitle)).shouldNot(exist);
-            System.out.println("Cleanup: Post with ID " + createdPostId + " was deleted.");
+            $(byText(blogTitle)).shouldNot(exist);
+            System.out.println("Cleanup: Blog with ID " + createdBlogId + " was deleted.");
 
             loginPage.fastLogout();
         }
