@@ -14,7 +14,6 @@ public class OrganizationClient {
     @Step("Getting organizations")
     public Response getOrgs() {
         return given()
-                //Cancel global authorization in BaseTest
                 .auth().none()
                 .when()
                 .get(ORGANIZATIONS_ENDPOINT)
@@ -29,13 +28,13 @@ public class OrganizationClient {
         return given()
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
-                .contentType("application/json") // Обязательно добавь это!
+                .contentType("application/json")
                 .body(organization)
-                .log().all() // Выведет запрос в консоль
+                .log().all()
                 .when()
                 .post(ORGANIZATIONS_ENDPOINT)
                 .then()
-                .log().all() // Выведет ответ (посмотри, какой там status)
+                .log().all()
                 .extract().response();
     }
 
@@ -44,7 +43,6 @@ public class OrganizationClient {
     public void deleteOrgForce(int id) {
         given()
                 .when()
-                // force=true - permanent delete (not into trash)
                 .delete(ORGANIZATIONS_ENDPOINT + id + "?force=true")
                 .then()
                 .statusCode(200);

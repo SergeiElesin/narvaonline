@@ -29,13 +29,13 @@ public class PersonClient {
         return given()
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
-                .contentType("application/json") // Обязательно добавь это!
+                .contentType("application/json")
                 .body(person)
-                .log().all() // Выведет запрос в консоль
+                .log().all()
                 .when()
                 .post(PERSON_ENDPOINT)
                 .then()
-                .log().all() // Выведет ответ (посмотри, какой там status)
+                .log().all()
                 .extract().response();
     }
 

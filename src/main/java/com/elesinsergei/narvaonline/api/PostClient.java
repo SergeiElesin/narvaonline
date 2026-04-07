@@ -14,7 +14,6 @@ public class PostClient {
     @Step("Getting posts")
     public Response getPosts() {
         return given()
-                //Cancel global authorization in BaseTest
                 .auth().none()
                 .when()
                 .get(POSTS_ENDPOINT)
@@ -29,13 +28,13 @@ public class PostClient {
         return given()
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
-                .contentType("application/json") // Обязательно добавь это!
+                .contentType("application/json")
                 .body(post)
-                .log().all() // Выведет запрос в консоль
+                .log().all()
                 .when()
                 .post(POSTS_ENDPOINT)
                 .then()
-                .log().all() // Выведет ответ (посмотри, какой там status)
+                .log().all()
                 .extract().response();
     }
 
@@ -43,9 +42,9 @@ public class PostClient {
     @Step("Post removal")
     public void deletePost(Integer id) {
         given()
-                .filter(new io.qameta.allure.restassured.AllureRestAssured()) // чтобы удаление тоже попало в отчет
+                .filter(new io.qameta.allure.restassured.AllureRestAssured())
                 .when()
-                .delete("/posts/" + id + "?force=true") // force=true — это важно для WP, чтобы не в корзину, а сразу
+                .delete("/posts/" + id + "?force=true")
                 .then()
                 .statusCode(200);
     }

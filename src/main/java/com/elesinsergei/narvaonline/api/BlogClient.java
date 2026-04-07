@@ -1,50 +1,49 @@
 package com.elesinsergei.narvaonline.api;
 
-import com.elesinsergei.narvaonline.models.Event;
+import com.elesinsergei.narvaonline.models.Blog;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class EventClient {
+public class BlogClient {
 
-    private static final String EVENT_ENDPOINT = "/lsvr_event/";
+    private static final String BLOG_ENDPOINT = "/blog/";
 
-    //Getting event list
-    @Step("Getting events")
-    public Response getEvents() {
+    //Getting blogpost list
+    @Step("Getting blog posts")
+    public Response getBlogPosts() {
         return given()
                 .auth().none()
                 .when()
-                .get(EVENT_ENDPOINT)
+                .get(BLOG_ENDPOINT)
                 .then()
                 .extract().
                 response();
     }
 
-    //Event creation
-    @Step("Event creation")
-    public Response createEvent(Event event) {
+    //Blog post creation
+    @Step("Blog Post creation")
+    public Response createBlogPost(Blog blog) {
         return given()
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json")
-                .body(event)
+                .body(blog)
                 .log().all()
                 .when()
-                .post(EVENT_ENDPOINT)
+                .post(BLOG_ENDPOINT)
                 .then()
                 .log().all()
                 .extract().response();
     }
 
-    //Event removing (ID)
-    @Step("Deleting an event via API (ID: {id})")
-    public void deleteEvent(int id) {
+    //Blogpost removing (ID)
+    @Step("Deleting an blogpost via API (ID: {id})")
+    public void deleteBlogPost(int id) {
         given()
                 .when()
-                // force=true - permanent delete (not into trash)
-                .delete(EVENT_ENDPOINT + id + "?force=true")
+                .delete(BLOG_ENDPOINT + id + "?force=true")
                 .then()
                 .statusCode(200);
     }

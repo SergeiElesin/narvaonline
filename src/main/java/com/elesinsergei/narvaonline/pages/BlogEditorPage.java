@@ -54,7 +54,6 @@ public class BlogEditorPage {
         // "Set Post Image" button in the modal window
         $(".media-toolbar-primary .media-button-select").shouldBe(enabled).click();
 
-
         saveDraftButton.click();
     }
 
