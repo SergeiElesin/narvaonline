@@ -19,12 +19,12 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 /**
- * PostHybridTest contains tests for Event creation and deletion
+ * EventHybridTest contains tests for Event creation and deletion
  */
 @Epic("E2E Tests")
 @Feature("Authentication, event creation, check event existing, event delete")
 public class EventHybridTest extends BaseTest {
-    ;
+
     private final String eventTitle = "E2E Event title" + System.currentTimeMillis();
     private final String eventContent = "E2E Event content " + System.currentTimeMillis();
     private Integer createdEventId;
@@ -62,7 +62,6 @@ public class EventHybridTest extends BaseTest {
             eventClient.deleteEvent(createdEventId);
             //Reload the page and force clear the cache.
             String currentUrl = WebDriverRunner.url();
-            //open(currentUrl + "?nocache=" + System.currentTimeMillis());
             open(currentUrl + "?nocache=");
             // Checking for the absence of a post
             $(byText(eventTitle)).shouldNot(exist);

@@ -19,7 +19,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 /**
- * PostHybridTest contains tests for Blog post creation and deletion
+ * BlogHybridTest contains tests for Blog post creation and deletion
  */
 
 @Epic("E2E Tests")
@@ -62,7 +62,6 @@ public class BlogHybridTest extends BaseTest {
             blogClient.deleteBlogPost(createdBlogId);
             //Reload the page and force clear the cache.
             String currentUrl = WebDriverRunner.url();
-            //open(currentUrl + "?nocache=" + System.currentTimeMillis());
             open(currentUrl + "?nocache=");
             // Checking for the absence of a post
             $(byText(blogTitle)).shouldNot(exist);
