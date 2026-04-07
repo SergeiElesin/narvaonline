@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Post {
+public class Page {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer id;
     private String title;
