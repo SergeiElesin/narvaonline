@@ -6,6 +6,10 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * API Client for organization
+ */
+
 public class OrganizationClient {
 
     private static final String ORGANIZATIONS_ENDPOINT = "/lsvr_listing/";

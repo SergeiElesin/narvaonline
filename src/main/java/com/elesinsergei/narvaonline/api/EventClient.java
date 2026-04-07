@@ -6,6 +6,10 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * API Client for event
+ */
+
 public class EventClient {
 
     private static final String EVENT_ENDPOINT = "/lsvr_event/";

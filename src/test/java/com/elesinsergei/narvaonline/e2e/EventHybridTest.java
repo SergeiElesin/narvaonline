@@ -60,7 +60,7 @@ public class EventHybridTest extends BaseTest {
         if (createdEventId != null) {
             // Delete the event
             eventClient.deleteEvent(createdEventId);
-            //Reload the pagw and force clear the cache.
+            //Reload the page and force clear the cache.
             String currentUrl = WebDriverRunner.url();
             open(currentUrl + "?nocache=");
             // Checking for the absence of event

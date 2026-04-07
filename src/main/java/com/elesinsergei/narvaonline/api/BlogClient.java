@@ -6,6 +6,10 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
+/**
+ * API Client for blog
+ */
+
 public class BlogClient {
 
     private static final String BLOG_ENDPOINT = "/blog/";
