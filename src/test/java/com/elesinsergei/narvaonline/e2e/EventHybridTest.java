@@ -56,14 +56,14 @@ public class EventHybridTest extends BaseTest {
 
     @AfterEach
     public void cleanUp() {
-        // Check that the ID exists (the post was successfully created)
+        // Check that the ID exists (the event was successfully created)
         if (createdEventId != null) {
             // Delete the event
             eventClient.deleteEvent(createdEventId);
-            //Reload the page and force clear the cache.
+            //Reload the pagw and force clear the cache.
             String currentUrl = WebDriverRunner.url();
             open(currentUrl + "?nocache=");
-            // Checking for the absence of a post
+            // Checking for the absence of event
             $(byText(eventTitle)).shouldNot(exist);
             System.out.println("Cleanup: Event with ID " + createdEventId + " was deleted.");
 

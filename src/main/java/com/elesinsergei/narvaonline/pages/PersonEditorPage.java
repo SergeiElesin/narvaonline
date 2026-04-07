@@ -64,7 +64,7 @@ public class PersonEditorPage {
 
     @Step("Check Person Publishing")
     public void checkPublish() {
-        open("/lyudi/");
+        open("/people/");
         $(byText("Test Person via Selenide")).shouldBe(visible);
     }
 
