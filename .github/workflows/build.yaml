@@ -35,6 +35,10 @@ jobs:
       - name: Set up Chrome
         uses: browser-actions/setup-chrome@v1
 
+      # ─── 4. Разрешение для gradle ──────────────────────────────────────────
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
       # ─── 4. Запуск тестов ──────────────────────────────────────────
       - name: Run tests
         env:
