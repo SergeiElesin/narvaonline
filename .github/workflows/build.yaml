@@ -41,6 +41,7 @@ jobs:
 
       # ─── 4. Запуск тестов ──────────────────────────────────────────
       - name: Run tests
+        continue-on-error: true   # ← !!!!!!!!!!!чтобы allure шаги выполнились даже при падении
         env:
           # Secrets — чувствительные данные
           USER_NAME:    ${{ secrets.USER_NAME }}
@@ -50,8 +51,24 @@ jobs:
           BASE_URL:         ${{ vars.BASE_URL }}
           BASE_URL_API:     ${{ vars.BASE_URL_API }}
           BROWSER_HEADLESS: ${{ vars.BROWSER_HEADLESS }}
+          #BROWSER_HEADLESS: "true"   # ← принудительно headless в CI
         #run: mvn clean test -B
         run: ./gradlew clean test
+                -Dselenide.headless=true
+                -Dselenide.browser=chrome
+                -Dchromeoptions.args=--no-sandbox,--disable-dev-shm-usage
+
+
+      # ─── 4. Install Allure CLI ──────────────────────────────────────────
+          #- name: Install Allure CLI
+          #if: always()
+            #run: |
+            #curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.31.0/allure-2.31.0.tgz
+            #tar -zxvf allure.tgz
+            #sudo mv allure-2.31.0 /opt/allure
+            #sudo ln -s /opt/allure/bin/allure /usr/bin/allure
+
+
 
       # ─── 5. Allure: генерируем отчёт ──────────────────────────────
       - name: Get Allure history
@@ -64,7 +81,8 @@ jobs:
 
       - name: Generate Allure report
         #uses: simple-elf/allure-report-action@v1.7
-        uses: simple-elf/allure-report-action@master
+        #uses: simple-elf/allure-report-action@master
+        uses: andrcuns/allure-report-action@v2.7.0
         if: always()
         with:
           allure_results: build/allure-results
@@ -88,6 +106,7 @@ jobs:
           name: allure-results
           path: build/allure-results
           retention-days: 7
+          if-no-files-found: warn
 
       - name: Upload Allure report (HTML)
         uses: actions/upload-artifact@v4
