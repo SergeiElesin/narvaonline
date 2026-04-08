@@ -39,9 +39,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # ─── 4. Запуск тестов ──────────────────────────────────────────
+      # ─── 5. Запуск тестов ──────────────────────────────────────────
       - name: Run tests
-        continue-on-error: true   # ← !!!!!!!!!!!чтобы allure шаги выполнились даже при падении
+        continue-on-error: true   # ← чтобы allure шаги выполнились даже при падении
         env:
           # Secrets — чувствительные данные
           USER_NAME:    ${{ secrets.USER_NAME }}
@@ -51,26 +51,13 @@ jobs:
           BASE_URL:         ${{ vars.BASE_URL }}
           BASE_URL_API:     ${{ vars.BASE_URL_API }}
           BROWSER_HEADLESS: ${{ vars.BROWSER_HEADLESS }}
-          #BROWSER_HEADLESS: "true"   # ← принудительно headless в CI
         #run: mvn clean test -B
         run: ./gradlew clean test
                 -Dselenide.headless=true
                 -Dselenide.browser=chrome
                 -Dchromeoptions.args=--no-sandbox,--disable-dev-shm-usage
 
-
-      # ─── 4. Install Allure CLI ──────────────────────────────────────────
-          #- name: Install Allure CLI
-          #if: always()
-            #run: |
-            #curl -o allure.tgz -L https://github.com/allure-framework/allure2/releases/download/2.31.0/allure-2.31.0.tgz
-            #tar -zxvf allure.tgz
-            #sudo mv allure-2.31.0 /opt/allure
-            #sudo ln -s /opt/allure/bin/allure /usr/bin/allure
-
-
-
-      # ─── 5. Allure: генерируем отчёт ──────────────────────────────
+      # ─── 6. Allure: генерируем отчёт ──────────────────────────────
       - name: Get Allure history
         uses: actions/checkout@v4
         if: always()
@@ -88,7 +75,7 @@ jobs:
           allure_history: gh-pages
           keep_reports: 20
 
-      # ─── 6. Публикуем отчёт на GitHub Pages ───────────────────────
+      # ─── 7. Публикуем отчёт на GitHub Pages ───────────────────────
       - name: Publish Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: always()
@@ -96,8 +83,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+          keep_files: true
 
-      # ─── 7. Сохраняем артефакты (даже при падении тестов) ─────────
+      # ─── 8. Сохраняем артефакты (даже при падении тестов) ─────────
       - name: Upload Allure results (raw)
         uses: actions/upload-artifact@v4
         if: always()
