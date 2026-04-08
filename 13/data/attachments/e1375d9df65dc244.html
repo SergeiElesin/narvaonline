@@ -1,0 +1,29 @@
+<div>POST to https://narva-online.ee/wp-json/wp/v2/posts</div>
+
+    <h4>Body</h4>
+    <div>
+    <pre class="preformated-text">
+{
+    &quot;title&quot;: &quot;E2E Post title1775652407690&quot;,
+    &quot;content&quot;: &quot;E2E Blogpost content 1775652407690&quot;,
+    &quot;status&quot;: &quot;publish&quot;
+}    </pre>
+    </div>
+
+    <h4>Headers</h4>
+    <div>
+            <div>Accept: */*</div>
+            <div>Content-Type: application/json</div>
+    </div>
+
+
+
+    <h4>Curl</h4>
+    <div>
+        curl -v -X POST &#39;https://narva-online.ee/wp-json/wp/v2/posts&#39; -H &#39;Accept: */*&#39; -H &#39;Content-Type: application/json&#39; -d &#39;{
+    &quot;title&quot;: &quot;E2E Post title1775652407690&quot;,
+    &quot;content&quot;: &quot;E2E Blogpost content 1775652407690&quot;,
+    &quot;status&quot;: &quot;publish&quot;
+}&#39;
+    </div>
+
