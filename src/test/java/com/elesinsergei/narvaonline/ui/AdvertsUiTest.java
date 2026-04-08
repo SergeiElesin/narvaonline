@@ -37,7 +37,6 @@ public class AdvertsUiTest extends BaseTest {
         advertsRegisterPage.register(TEST_USERNAME, TEST_EMAIL, TEST_PASSWORD);
         // Check for successful registration
         $(byTagAndText("h1", TEST_USERNAME)).shouldBe(visible);
-        sleep(3000);
     }
 
     @Test
