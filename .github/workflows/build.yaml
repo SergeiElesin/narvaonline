@@ -1,18 +1,17 @@
-#Название сборки, отображается в github actions
+#The name of the build, displayed in GitHub actions
 name: NarvaOnline Framework CI
 
-#Типы событий, при которых запускается workflow
-#Именно в указанной ветке
+#Event types that trigger workflow in the specified branches
 on:
-  push:
-    branches: [ main, master, develop ]
-  pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:        # запуск вручную из GitHub UI
+  #push:
+    #branches: [ main, master, develop ]
+  #pull_request:
+    #branches: [ main, master ]
+  workflow_dispatch:        # Launch manually from the GitHub UI
 
-#джоба, их может быть несколько
+#Joba, there may be several of them
 jobs:
-#название джобы
+#job name
   tests:
     name: Run Tests
     runs-on: ubuntu-latest
@@ -20,39 +19,36 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true  # force switch to node 24 version
 
     steps:
-      # ─── 1. Получаем код ───────────────────────────────────────────
+      # ─── 1. Getting the code ───────────────────
       - name: Checkout repository
-        #uses: actions/checkout@v4
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6      # ← updated version, switch from v4
 
-      # ─── 2. Java 21 ────────────────────────────────────────────────
+      # ─── 2. Java 21 ────────────────────
       - name: Set up JDK 21
-        #uses: actions/setup-java@v4
-        uses: actions/setup-java@v5.2.0
+        uses: actions/setup-java@v5.2.0      # ← updated version, switch from v4
         with:
           java-version: '21'
           distribution: 'temurin'
-          cache: gradle          # кэшируем ~/.m2 между запусками
-          #cache: maven          # кэшируем ~/.m2 между запусками
+          cache: gradle          # ← caching ~/.m2 between launches
+          #cache: maven          # ←  caching ~/.m2 between launches
 
-      # ─── 3. Браузер для Selenide ───────────────────────────────────
+      # ─── 3. Browser for Selenide ──────────────────
       - name: Set up Chrome
-        #uses: browser-actions/setup-chrome@v1
-        uses: browser-actions/setup-chrome@latest
+        uses: browser-actions/setup-chrome@latest        # ← updated version, switch from v1
 
-      # ─── 4. Разрешение для gradle ──────────────────────────────────────────
+      # ─── 4. Permission for gradle ───────────────
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # ─── 5. Запуск тестов ──────────────────────────────────────────
+      # ─── 5. Launching tests ───────────────
       - name: Run tests
-        continue-on-error: true   # ← чтобы allure шаги выполнились даже при падении
+        continue-on-error: true   # ← for allure steps are executed even if tests fail
         env:
-          # Secrets — чувствительные данные
+          # Secrets — sensitive data
           USER_NAME:    ${{ secrets.USER_NAME }}
           PASSWORD:     ${{ secrets.PASSWORD }}
           APP_PASSWORD: ${{ secrets.APP_PASSWORD }}
-          # Variables — конфигурация окружения
+          # Variables — environment configuration
           BASE_URL:         ${{ vars.BASE_URL }}
           BASE_URL_API:     ${{ vars.BASE_URL_API }}
           BROWSER_HEADLESS: ${{ vars.BROWSER_HEADLESS }}
@@ -61,10 +57,9 @@ jobs:
                 -Dselenide.browser=chrome
                 -Dchromeoptions.args=--no-sandbox,--disable-dev-shm-usage
 
-      # ─── 6. Allure: генерируем отчёт ──────────────────────────────
+      # ─── 6. Allure: generating a report ──────────
       - name: Get Allure history
-        #uses: actions/checkout@v4
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6       # ← updated version, switch from v4
         if: always()
         continue-on-error: true
         with:
@@ -76,11 +71,11 @@ jobs:
         if: always()
         with:
           allure_results: build/allure-results
-          gh_pages: gh-pages          # ← откуда берём историю
-          allure_history: allure-history  # ← куда пишем новый отчёт
-          keep_reports: 20      # ← храним 20 отчётов, установить на 1, если не нужно хранить историю
+          gh_pages: gh-pages          # ← this is where we take the history
+          allure_history: allure-history  # ← here we write a new
+          keep_reports: 20      # ← store 20 reports, set to 1 if you don't need to store history
 
-      # ─── 7. Публикуем отчёт на GitHub Pages ───────────────────────
+      # ─── 7. Publish the report on GitHub Pages ──────
       - name: Publish Allure report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         if: always()
@@ -89,12 +84,11 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
           keep_files: true
-          #force_orphan: true     # ← каждый раз перезаписывает ветку gh-pages
+          #force_orphan: true     # ← each time overwrites the gh-pages branch
 
-      # ─── 8. Сохраняем артефакты (даже при падении тестов) ─────────
+      # ─── 8. Saving artifacts (even when tests fail) ───
       - name: Upload Allure results (raw)
-        #uses: actions/upload-artifact@v4
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7       # ← updated version, switch from v4
         if: always()
         with:
           name: allure-results
@@ -103,8 +97,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Upload Allure report (HTML)
-        #uses: actions/upload-artifact@v4
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v7       # ← updated version, switch from v4
         if: always()
         with:
           name: allure-report
