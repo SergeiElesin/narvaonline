@@ -9,7 +9,7 @@ on:
     #branches: [ main, master ]
   workflow_dispatch:        # Launch manually from the GitHub UI
 
-#Joba, there may be several of them
+#Job, there may be several of them
 jobs:
 #job name
   tests:
