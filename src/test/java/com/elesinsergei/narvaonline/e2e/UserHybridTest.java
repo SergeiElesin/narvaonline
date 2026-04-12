@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
  */
 
 @Epic("E2E Tests")
-@Feature("Posts API")
+@Feature("Users API")
 public class UserHybridTest extends BaseTest {
 
     private static final String username = "1APItestUser" + System.currentTimeMillis();
@@ -63,7 +63,7 @@ public class UserHybridTest extends BaseTest {
 
         loginPage.fastLogout();
 
-        // 4. Delete via ID
+        // 4. Delete (ID)
         if (createdUserId != null) {
             userClient.deleteUser(createdUserId);
         }

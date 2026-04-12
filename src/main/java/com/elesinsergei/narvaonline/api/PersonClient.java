@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.Person;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
@@ -17,6 +18,7 @@ public class PersonClient {
     @Step("Getting persons")
     public Response getPersons() {
         return given()
+                .filter(new AllureRestAssured())
                 .auth().none()
                 .when()
                 .get(PERSON_ENDPOINT)
@@ -29,6 +31,7 @@ public class PersonClient {
     @Step("Person creation")
     public Response createPerson(Person person) {
         return given()
+                .filter(new AllureRestAssured())
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json")
@@ -45,6 +48,7 @@ public class PersonClient {
     @Step("Deleting an person via API (ID: {id})")
     public void deletePerson(int id) {
         given()
+                .filter(new AllureRestAssured())
                 .when()
                 // force=true - permanent delete (not into trash)
                 .delete(PERSON_ENDPOINT + id + "?force=true")

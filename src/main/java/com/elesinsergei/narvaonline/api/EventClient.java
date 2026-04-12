@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.Event;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -18,6 +19,7 @@ public class EventClient {
     @Step("Getting events")
     public Response getEvents() {
         return given()
+                .filter(new AllureRestAssured())
                 .auth().none()
                 .when()
                 .get(EVENT_ENDPOINT)
@@ -30,6 +32,7 @@ public class EventClient {
     @Step("Event creation")
     public Response createEvent(Event event) {
         return given()
+                .filter(new AllureRestAssured())
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json")
@@ -46,6 +49,7 @@ public class EventClient {
     @Step("Deleting an event via API (ID: {id})")
     public void deleteEvent(int id) {
         given()
+                .filter(new AllureRestAssured())
                 .when()
                 // force=true - permanent delete (not into trash)
                 .delete(EVENT_ENDPOINT + id + "?force=true")

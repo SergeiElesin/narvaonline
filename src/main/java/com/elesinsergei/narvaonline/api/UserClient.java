@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.User;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -18,6 +19,7 @@ public class UserClient {
     @Step("Post creation")
     public Response createUser(User user) {
         return given()
+                .filter(new AllureRestAssured())
                 .contentType("application/json")
                 .body(user)
                 .log().all()
@@ -32,6 +34,7 @@ public class UserClient {
     @Step("Getting user by slug")
     public Response getUserBySlug(String slug) {
         return given()
+                .filter(new AllureRestAssured())
                 .queryParam("slug", slug)
                 .when()
                 .get(USERS_ENDPOINT)
@@ -56,7 +59,8 @@ public class UserClient {
     @Step("User removal")
     public void deleteUser(Integer id) {
         given()
-                .filter(new io.qameta.allure.restassured.AllureRestAssured())
+                .filter(new AllureRestAssured())
+                //.filter(new io.qameta.allure.restassured.AllureRestAssured())
                 .queryParam("force", true)
                 .queryParam("reassign", 1)
                 .when()

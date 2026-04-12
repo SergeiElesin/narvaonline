@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.Organization;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -18,6 +19,7 @@ public class OrganizationClient {
     @Step("Getting organizations")
     public Response getOrgs() {
         return given()
+                .filter(new AllureRestAssured())
                 .auth().none()
                 .when()
                 .get(ORGANIZATIONS_ENDPOINT)
@@ -30,6 +32,7 @@ public class OrganizationClient {
     @Step("Organization creation")
     public Response createOrg(Organization organization) {
         return given()
+                .filter(new AllureRestAssured())
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json")
@@ -46,6 +49,7 @@ public class OrganizationClient {
     @Step("Deleting an organization via API (ID: {id})")
     public void deleteOrgForce(int id) {
         given()
+                .filter(new AllureRestAssured())
                 .when()
                 .delete(ORGANIZATIONS_ENDPOINT + id + "?force=true")
                 .then()

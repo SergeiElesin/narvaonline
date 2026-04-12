@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.api;
 
 import com.elesinsergei.narvaonline.models.Page;
 import io.qameta.allure.Step;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
@@ -17,6 +18,7 @@ public class PageClient {
     @Step("Getting pages")
     public Response getPages() {
         return given()
+                .filter(new AllureRestAssured())
                 .auth().none()
                 .when()
                 .get(PAGE_ENDPOINT)
@@ -29,6 +31,7 @@ public class PageClient {
     @Step("Page creation")
     public Response createPage(Page page) {
         return given()
+                .filter(new AllureRestAssured())
                 // Authorization:
                 //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json")
@@ -45,6 +48,7 @@ public class PageClient {
     @Step("Deleting an page via API (ID: {id})")
     public void deletePage(int id) {
         given()
+                .filter(new AllureRestAssured())
                 .when()
                 .delete(PAGE_ENDPOINT + id + "?force=true")
                 .then()
