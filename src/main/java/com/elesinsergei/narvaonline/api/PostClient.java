@@ -73,7 +73,7 @@ public class PostClient {
                         title, status, password, content
                 ))
                 .when()
-                .post("/posts");
+                .post(POSTS_ENDPOINT);
     }
 
     @Step("UI: Test that post is visible")

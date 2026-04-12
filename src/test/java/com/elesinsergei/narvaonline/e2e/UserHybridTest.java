@@ -37,7 +37,7 @@ public class UserHybridTest extends BaseTest {
     @Story("User creation, test login via UI, user removal via UI")
     @DisplayName("User creation, test login via UI, user removal via UI")
     @Step("E2E Test: User creation, login and removal")
-    public void postCreatedViaApiAndDeleted() {
+    public void userCreatedViaApiAndDeleted() {
 
         // 1. Creating User via API
         User userRequest = User.builder()

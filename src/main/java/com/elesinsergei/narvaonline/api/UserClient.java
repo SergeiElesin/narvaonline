@@ -16,7 +16,7 @@ public class UserClient {
     private static final String USERS_ENDPOINT = "/users";
 
     //User creation
-    @Step("Post creation")
+    @Step("User creation")
     public Response createUser(User user) {
         return given()
                 .filter(new AllureRestAssured())
@@ -42,18 +42,6 @@ public class UserClient {
                 .log().ifValidationFails()
                 .extract().response();
     }
-
-    //Getting users list
-    /*@Step("Getting users")
-    public Response getUsers() {
-        return given()
-                .when()
-                .get(USERS_ENDPOINT)
-                .then()
-                .log().ifValidationFails() // Looking for mistakes
-                .extract().
-                response();
-    }*/
 
     //Post removal (ID)
     @Step("User removal")
