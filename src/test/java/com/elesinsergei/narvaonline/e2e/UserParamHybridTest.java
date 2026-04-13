@@ -20,6 +20,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItem;
 
+/**
+ * Parameterized test: user creation, verification, removal depends on parameters
+ */
+
 @Epic("E2E parametrized Tests")
 @Feature("Parametrized User test")
 public class UserParamHybridTest extends BaseTest {

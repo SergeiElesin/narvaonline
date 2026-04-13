@@ -13,6 +13,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
+/**
+ * Parameterized test: post creation, verification, removal depends on parameters
+ */
 
 @Epic("E2E parametrized Tests")
 @Feature("Parametrized post test")

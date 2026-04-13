@@ -8,6 +8,10 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+/**
+ * Parameters for PostParamHybridTest
+ */
+
 public class PostParamHybridTestData implements ArgumentsProvider {
 
     @Override
