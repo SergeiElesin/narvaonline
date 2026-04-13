@@ -18,4 +18,6 @@ public class Post {
     private String title;
     private String content;
     private String status;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String password;
 }

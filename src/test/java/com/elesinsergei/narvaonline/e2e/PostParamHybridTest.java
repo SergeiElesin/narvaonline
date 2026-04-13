@@ -1,9 +1,9 @@
 package com.elesinsergei.narvaonline.e2e;
 
-import com.codeborne.selenide.Condition;
 import com.elesinsergei.narvaonline.BaseTest;
 import com.elesinsergei.narvaonline.api.PostClient;
 import com.elesinsergei.narvaonline.data.PostParamHybridTestData;
+import com.elesinsergei.narvaonline.models.Post;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+
 
 @Epic("E2E parametrized Tests")
 @Feature("Parametrized post test")
@@ -25,12 +26,20 @@ public class PostParamHybridTest extends BaseTest {
     @ArgumentsSource(PostParamHybridTestData.class)
     @Story("Parametrized posts creation, verify via UI, post removal")
     @DisplayName("Parametrized posts test")
-    void testWordPressPostLogic(String title, String status, String password, String content, int expectedCode, boolean shouldBeVisible) {
+    void testWordPressPostLogic(String title, String status, String password, String content, int expectedCode) {
 
         //Creating posts
-        Response response = postClient.createParamPost(title, status, password, content);
 
-        if (response.statusCode() == expectedCode && shouldBeVisible) {
+        Post postRequest = Post.builder()
+                .title(title)
+                .status(status)
+                .content(content)
+                .password(password)
+                .build();
+
+        Response response = postClient.createPost(postRequest);
+
+        if (response.statusCode() == expectedCode  && expectedCode == 201) {
             //Get thr post ID
             currentPostId = response.path("id");
 
@@ -38,7 +47,8 @@ public class PostParamHybridTest extends BaseTest {
             String postLink = response.path("link");
 
             // Verify post via UI
-            postClient.verifyPostBehavior(title, password, postLink);
+            String renderedTitle = response.path("title.rendered");
+            postClient.verifyPostBehavior(password, postLink, renderedTitle);
 
         } else {
             // Expect an error (case 3), checking only the API response code

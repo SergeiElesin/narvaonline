@@ -1,16 +1,19 @@
 package com.elesinsergei.narvaonline.api;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.elesinsergei.narvaonline.models.Post;
 import io.qameta.allure.Step;
 import io.qameta.allure.restassured.AllureRestAssured;
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.assertj.core.api.Assertions;
+import org.openqa.selenium.NoAlertPresentException;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 import static io.restassured.RestAssured.given;
+
 /**
  * API Client for post
  */
@@ -63,27 +66,45 @@ public class PostClient {
     /**
      * for PostParamHybridTest
      */
-    @Step("API: Parametrized Post creation")
-    public Response createParamPost(String title, String status, String password, String content) {
-        return given()
-                .filter(new AllureRestAssured())
-                .contentType(ContentType.JSON)
-                .body(String.format(
-                        "{\"title\":\"%s\", \"status\":\"%s\", \"password\":\"%s\", \"content\":\"%s\"}",
-                        title, status, password, content
-                ))
-                .when()
-                .post(POSTS_ENDPOINT);
-    }
-
-    @Step("UI: Test that post is visible")
-    public void verifyPostBehavior(String title, String password, String postLink) {
+    @Step("UI: Test that post is published")
+    public void verifyPostBehavior(String password, String postLink, String renderedTitle) {
         open(postLink);
+
+        //check for alarm
+        try {
+            String alertText = WebDriverRunner.getWebDriver().switchTo().alert().getText();
+            WebDriverRunner.getWebDriver().switchTo().alert().accept();
+            Assertions.fail("XSS vulnerability detected! Alert fired with text: " + alertText);
+        } catch (NoAlertPresentException ignored) {
+
+        }
+
+        String displayedTitle = StringEscapeUtils.unescapeHtml4(renderedTitle);
+
         if (password != null && !password.isEmpty()) {
-            $(byText("Защищено: " + title)).shouldBe(Condition.visible);
+            if (!displayedTitle.isEmpty()) {
+                assertTextPresentOnPage("Защищено: " + displayedTitle);
+            }
             $(".post-password-form").shouldBe(Condition.visible);
         } else {
-            $(byText(title)).shouldBe(Condition.visible);
+            if (!displayedTitle.isEmpty()) {
+                assertTextPresentOnPage(displayedTitle);
+            }
         }
+    }
+
+
+    private void assertTextPresentOnPage(String text) {
+        // Normalize multiple spaces into one
+        String normalizedText = text.replaceAll("\\s+", " ").trim();
+
+        Boolean found = Selenide.executeJavaScript(
+                "var pageText = document.body.innerText.replace(/\\s+/g, ' ');" +
+                "return pageText.includes(arguments[0]);",
+                normalizedText
+        );
+        Assertions.assertThat(found)
+                .as("Expected text on page: [" + normalizedText + "]")
+                .isTrue();
     }
 }
