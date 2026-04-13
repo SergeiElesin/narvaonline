@@ -10,12 +10,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for blog
  */
-
 public class BlogClient {
 
     private static final String BLOG_ENDPOINT = "/blog/";
 
-    //Getting blogpost list
+    /**
+     * Getting blogpost list
+     */
     @Step("Getting blog posts")
     public Response getBlogPosts() {
         return given()
@@ -28,7 +29,9 @@ public class BlogClient {
                 response();
     }
 
-    //Blog post creation
+    /**
+     * Blog post creation
+     */
     @Step("Blog Post creation")
     public Response createBlogPost(Blog blog) {
         return given()
@@ -45,7 +48,9 @@ public class BlogClient {
                 .extract().response();
     }
 
-    //Blogpost removing (ID)
+    /**
+     * Blogpost removing (ID)
+     */
     @Step("Deleting an blogpost via API (ID: {id})")
     public void deleteBlogPost(int id) {
         given()

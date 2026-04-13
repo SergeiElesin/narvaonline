@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Model for blog user
+ */
 @Data
 @Builder
 @NoArgsConstructor

@@ -10,12 +10,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for users
  */
-
 public class UserClient {
 
     private static final String USERS_ENDPOINT = "/users";
 
-    //User creation
+    /**
+     * User creation
+     */
     @Step("User creation")
     public Response createUser(User user) {
         return given()
@@ -30,7 +31,9 @@ public class UserClient {
                 .extract().response();
     }
 
-    //Getting users by slug
+    /**
+     *Getting users by slug
+     */
     @Step("Getting user by slug")
     public Response getUserBySlug(String slug) {
         return given()
@@ -43,7 +46,9 @@ public class UserClient {
                 .extract().response();
     }
 
-    //Post removal (ID)
+    /**
+     * Post removal (ID)
+     */
     @Step("User removal")
     public void deleteUser(Integer id) {
         given()
@@ -56,6 +61,4 @@ public class UserClient {
                 .then()
                 .statusCode(200);
     }
-
-
 }

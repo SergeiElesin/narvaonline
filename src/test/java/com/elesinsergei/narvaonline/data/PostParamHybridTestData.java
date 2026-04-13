@@ -19,6 +19,16 @@ public class PostParamHybridTestData implements ArgumentsProvider {
         return postDataProvider(); // Call method postDataProvider
     }
 
+    /**
+     * Stream contains data source for PostParamHybridTest.
+     * Case 1: A regular post should be visible to everyone
+     * Case 2: Post with password – the text "Protected" should appear in the UI
+     * Case 3: Invalid data (no content or title). Expecting that the API may return an error (depending on WP settings)
+     * Case 4: HTML in title - XSS protection
+     * Case 5: Very long title
+     * Case 6: Special characters in title
+     */
+
     // Data source for test cases
     public static Stream<Arguments> postDataProvider() {
         return Stream.of(

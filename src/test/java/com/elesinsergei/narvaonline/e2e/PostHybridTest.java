@@ -33,6 +33,11 @@ public class PostHybridTest extends BaseTest {
     HomePage homePage = new HomePage();
     LoginPage loginPage = new LoginPage();
 
+    /**
+     *1.Post creation via API
+     * 2.Verify post creation on frontend, checking for title is visible
+     */
+
     @Test
     @Story("Post creation via APi, see post via UI")
     @DisplayName("Successful post creation via APi")
@@ -52,6 +57,12 @@ public class PostHybridTest extends BaseTest {
         homePage.openPage().verifyPostTitleIsVisible(postTitle);
     }
 
+    /**
+     * Clean up
+     * Removal post, created in PostHybridTest.
+     * Checking for the absence of a post on frontend
+     * Fast logout.
+     */
     @AfterEach
     public void cleanUp() {
         // Check that the ID exists (the post was successfully created)

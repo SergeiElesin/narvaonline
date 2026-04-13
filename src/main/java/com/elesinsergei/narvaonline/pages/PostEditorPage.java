@@ -16,7 +16,8 @@ import java.io.File;
 import java.time.Duration;
 
 /**
- * PostEditorPage contains methods and data for Post Draft creating, testing and removal
+ * Page Object for PostEditorPage
+ * Contains methods and data for Post Draft creating, testing and removal
  */
 
 public class PostEditorPage{
@@ -36,6 +37,10 @@ public class PostEditorPage{
     private final SelenideElement blogInAdmin = $(By.xpath("//tr[contains(., 'Test draft via Selenide')]"));
 
     //Post Draft creation
+
+    /**
+     *Post Draft creation
+     */
     @Step("Post Draft creation")
     public void createDraft(String title, String content) {
         titleField.setValue(title);
@@ -56,7 +61,9 @@ public class PostEditorPage{
         saveDraftButton.click();
     }
 
-    // Check draft saving
+    /**
+     *Post Draft saving verification
+     */
     @Step("Post Draft saving verification")
     public void verifyDraftSavedWithTimeout(int seconds) {
         $("[data-testid='snackbar']")
@@ -64,7 +71,9 @@ public class PostEditorPage{
                 .shouldHave(text("Черновик сохранён"));
     }
 
-    // Delete post draft into the trash
+    /**
+     * Post Draft deleting into trash
+     */
     @Step("Post Draft deleting into trash")
     public void deleteCurrentPost() {
         // Если кнопка "В корзину" не видна (панель настроек закрыта), открываем её
@@ -86,6 +95,9 @@ public class PostEditorPage{
         webdriver().shouldHave(urlContaining("edit.php"), Duration.ofSeconds(12));
     }
 
+    /**
+     * Post Draft deleting from trash
+     */
     @Step("Post Draft deleting from trash")
     public void deleteFromTrash(){
         //Go to the basket

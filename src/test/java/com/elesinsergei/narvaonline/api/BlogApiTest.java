@@ -12,6 +12,9 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 
+/**
+ * API test - getting list of blog posts, creation, testing, deleting blog posts
+ */
 @Epic("API Tests")
 @Feature("Blog API")
 public class BlogApiTest extends BaseTest {
@@ -22,7 +25,9 @@ public class BlogApiTest extends BaseTest {
 
     BlogClient blogClient = new BlogClient();
 
-    //Getting list of blogposts
+    /**
+     * Getting list of blogposts via API
+     */
     @Test
     @DisplayName("Getting a list of blog posts")
     @Description("Check that the API returns a list of blog posts and a status code of 200.")
@@ -37,7 +42,12 @@ public class BlogApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that blog posts has titles
     }
 
-    //Blog post creation, test by title, blog post removal
+    /**
+     * 1.Blog post creation
+     * 2. Verify on frontend by title
+     * 3.Blog post removal
+     * 4.Verify blog post removal
+     */
     @Test
     @Story("Blog post creation, test, removal via APi")
     @DisplayName("Blog post creation and removal via API")

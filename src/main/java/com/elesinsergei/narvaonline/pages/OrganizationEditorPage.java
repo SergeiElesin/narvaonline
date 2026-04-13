@@ -11,9 +11,9 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 /**
- * OrganizationEditorPage contains methods and data used for organization creation, testing and removal
+ * Page Object for OrganizationEditorPage
+ * Contains methods and data used for organization creation, testing and removal
  */
-
 public class OrganizationEditorPage {
     private final SelenideElement titleField = $(".editor-post-title__input");
     private final SelenideElement chooseField = $(".block-editor-default-block-appender__content");
@@ -32,7 +32,9 @@ public class OrganizationEditorPage {
         return this;
     }*/
 
-    //Org creation via Admin Panel
+    /**
+     *Filling organization data
+     */
     @Step("Filling organization data")
     public void createOrganization(String title, String content) {
         titleField.setValue(title);
@@ -52,6 +54,9 @@ public class OrganizationEditorPage {
 
     }
 
+    /**
+     * Publishing organization
+     */
     @Step("Clicking the Publish button")
     public void publish() {
         // 1. Click the publish button

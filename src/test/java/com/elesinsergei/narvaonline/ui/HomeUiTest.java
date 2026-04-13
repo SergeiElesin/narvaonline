@@ -17,6 +17,10 @@ public class HomeUiTest extends BaseTest {
 
     HomePage homePage = new HomePage();
 
+    /**
+     * 1.Open main page
+     * 2.Verify page title on main page
+     */
     @Test
     @DisplayName("Check main page title")
     @Description("Open main page and check page title")

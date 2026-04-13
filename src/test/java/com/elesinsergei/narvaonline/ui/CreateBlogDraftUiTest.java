@@ -15,11 +15,20 @@ import org.junit.jupiter.api.Test;
 /**
  * CreateBlogDraftUiTest - test class for draft blog post type
  */
-
 @Epic("UI Tests")
 @Feature("Blog creation")
 public class CreateBlogDraftUiTest extends BaseTest {
 
+    /**
+     * 1.Login via UI
+     * 2.Go to blog draft creation in admin panel
+     * 3.Blog draft creation
+     * 4.Check of successful blog draft creation
+     * 5.Removal blog draft into trash
+     * 6.Permanent removal blog draft from trash
+     * 7.Removing a test image from the gallery
+     * 8.Fast logout
+     */
     @Test
     @Story("Blog creation in admin dashboard")
     @DisplayName("Successful blog-draft creation")

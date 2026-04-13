@@ -15,9 +15,9 @@ import static com.codeborne.selenide.Selenide.webdriver;
 import static com.codeborne.selenide.WebDriverConditions.urlContaining;
 
 /**
- * BlogEditorPage contains methods for creating, testing and removing blog posts
+ * Page Object for BlogEditorPage
+ * Contains methods and data for creating, testing and removing blog posts
  */
-
 public class BlogEditorPage {
 
     private final String BLOG_TRASH_URL = "/wp-admin/edit.php?post_status=trash&post_type=blog";
@@ -35,7 +35,9 @@ public class BlogEditorPage {
     //Blog in the admin panel
     private final SelenideElement blogInAdmin = $(By.xpath("//tr[contains(., 'Test blog-draft via Selenide')]"));
 
-    //Creating a blog draft
+    /**
+     *Creating a blog draft
+     */
     @Step("Blog draftCreation")
     public void createDraft(String title, String content) {
         titleField.setValue(title);
@@ -57,7 +59,9 @@ public class BlogEditorPage {
         saveDraftButton.click();
     }
 
-    // Checking that the blog draft has been saved
+    /**
+     * Checking that the blog draft has been saved
+     */
     @Step("Verify draft saved")
     public void verifyDraftSavedWithTimeout(int seconds) {
         $("[data-testid='snackbar']")
@@ -65,7 +69,9 @@ public class BlogEditorPage {
                 .shouldHave(text("Черновик сохранён"));
     }
 
-    // Delete the draft to the trash
+    /**
+     * Delete the draft to the trash
+     */
     @Step("Delete blog in trash")
     public void deleteCurrentBlog() {
         // Если кнопка "В корзину" не видна (панель настроек закрыта), открываем её
@@ -89,7 +95,9 @@ public class BlogEditorPage {
         webdriver().shouldHave(urlContaining("edit.php"), Duration.ofSeconds(12));
     }
 
-    //Permanent removal
+    /**
+     * Permanent removal
+     */
     @Step("Delete blog forever")
     public void deleteFromTrash(){
         //Go to the basket

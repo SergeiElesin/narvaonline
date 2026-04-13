@@ -20,6 +20,16 @@ import org.junit.jupiter.api.Test;
 @Feature("Post creation")
 public class CreatePostDraftUiTest extends BaseTest {
 
+    /**
+     * 1.Login via UI
+     * 2.Go to post draft creation in admin panel
+     * 3.Post draft creation
+     * 4.Check of successful post draft creation
+     * 5.Removal post draft into trash
+     * 6.Permanent removal post draft from trash
+     * 7.Removing a test image from the gallery
+     * 8.Fast logout
+     */
     @Test
     @Story("Post draft creation in admin dashboard")
     @DisplayName("Successful post draft creation")
@@ -39,7 +49,7 @@ public class CreatePostDraftUiTest extends BaseTest {
         // 3. Post draft creation
         postEditorPage.createDraft("Test draft via Selenide", "Test content");
 
-        //4. Check of post draft creation
+        //4. Check of successful post draft creation
         postEditorPage.verifyDraftSavedWithTimeout(12);
 
         //5. Removal post draft into trash

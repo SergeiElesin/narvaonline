@@ -36,6 +36,17 @@ public class OrganizationHybridTest extends BaseTest {
     OrganizationClient orgClient = new OrganizationClient();
     Utils utils = new Utils();
 
+    /**
+     * 1. Login on frontend
+     * 2. Transition to the creation of an organization
+     * 3. Organization creation on admin panel
+     * 4. Organization publication
+     * 5. Get the ID of the created post from the URL
+     * 6. Checking the presence of organization on front-end
+     * 7. Permanently delete an organization via the API
+     * 8. Removing a test image from the gallery
+     * 9. Verify post removal on frontend
+     */
     @Test
     @DisplayName("Creation and complete deletion of an organization")
     @Story("Organization creating and full deleting")
@@ -56,13 +67,13 @@ public class OrganizationHybridTest extends BaseTest {
         //3. Creating and publishing via POJO
         //orgEditorPage.fillOrgData(organization).publish();
 
-        //4. Organization creation
+        //3. Organization creation
         orgEditorPage.createOrganization("Elite Dev Studio", "Best solutions on Java");
 
-        //5. Organization publication
+        //4. Organization publication
         orgEditorPage.publish();
 
-        //6. Get the ID of the created post from the URL (needed for deleting it via API)
+        //5. Get the ID of the created post from the URL (needed for deleting it via API)
         //int postId = Integer.parseInt(WebDriverRunner.url().replaceAll(".*post=(\\d+).*", "$1"));
         int postId = Optional.ofNullable(WebDriverRunner.url())
                 .map(url -> {
@@ -73,25 +84,28 @@ public class OrganizationHybridTest extends BaseTest {
                 .orElseThrow(() -> new RuntimeException("Can't get postId from URL"));
 
 
-        //7. Checking the presence of organization on front-end
+        //6. Checking the presence of organization on front-end
         open("/katalog-organizatsij/");
         $(byText("Elite Dev Studio")).shouldBe(visible);
         //Getting a title from a POJO
         //$(byText(organization.getTitle())).shouldBe(visible);
 
-        //8. Cleanup: Permanently delete an organization via the API
+        //7. Cleanup: Permanently delete an organization via the API
         orgClient.deleteOrgForce(postId);
 
-        //9. Removing a test image from the gallery
+        //8. Removing a test image from the gallery
         utils.deleteTestImg();
 
-        //10. Final test: post is gone
+        //9. Final test: post is gone
         refresh();
         //Getting a title from a POJO
         //$(byText(organization.getTitle())).shouldNot(exist);
         $(byText("Elite Dev Studio")).shouldNot(exist);
     }
 
+    /**
+     * Fast logout after OrganizationHybridTest
+     */
     @AfterEach
     public void cleanUp() {
         loginPage.fastLogout();

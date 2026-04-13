@@ -17,12 +17,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for post
  */
-
 public class PostClient {
 
     private static final String POSTS_ENDPOINT = "/posts";
 
-    //Getting post list
+    /**
+     * Getting post list
+     */
     @Step("Getting posts")
     public Response getPosts() {
         return given()
@@ -35,13 +36,13 @@ public class PostClient {
                 response();
     }
 
-    //Post creation
+    /**
+     * Post creation
+     */
     @Step("Post creation")
     public Response createPost(Post post) {
         return given()
                 .filter(new AllureRestAssured())
-                // Authorization:
-                //.auth().preemptive().basic(username, appPassword)
                 .contentType("application/json")
                 .body(post)
                 .log().all()
@@ -52,7 +53,9 @@ public class PostClient {
                 .extract().response();
     }
 
-    //Post removal via ID
+    /**
+     * Post removal via (ID)
+     */
     @Step("Post removal")
     public void deletePost(Integer id) {
         given()
@@ -63,14 +66,17 @@ public class PostClient {
                 .statusCode(200);
     }
 
+    //──────────────────── for PostParamHybridTest────────────────────────//
+
     /**
-     * for PostParamHybridTest
+     * Test on frontend that post is published (title is visible)
+     * Check for XSS injection in title (alert)
      */
     @Step("UI: Test that post is published")
     public void verifyPostBehavior(String password, String postLink, String renderedTitle) {
         open(postLink);
 
-        //check for alarm
+        //check for alert
         try {
             String alertText = WebDriverRunner.getWebDriver().switchTo().alert().getText();
             WebDriverRunner.getWebDriver().switchTo().alert().accept();
@@ -93,7 +99,9 @@ public class PostClient {
         }
     }
 
-
+    /**
+     * Normalize multiple spaces in test title into one
+     */
     private void assertTextPresentOnPage(String text) {
         // Normalize multiple spaces into one
         String normalizedText = text.replaceAll("\\s+", " ").trim();

@@ -26,7 +26,9 @@ public class EventApiTest extends BaseTest {
 
     EventClient eventClient = new EventClient();
 
-    //Getting list of events
+    /**
+     * Getting list of events
+     */
     @Test
     @DisplayName("Getting a list of events")
     @Description("Check that the API returns a list of events and a status code of 200.")
@@ -41,7 +43,12 @@ public class EventApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that posts has titles
     }
 
-    //Event creation, test by title, event removal
+    /**
+     * 1.Event creation
+     * 2. Verify on frontend by title
+     * 3.Event removal
+     * 4.Verify event removal
+     */
     @Test
     @Story("Event creation, test, removal via APi")
     @DisplayName("Event creation and removal via API")

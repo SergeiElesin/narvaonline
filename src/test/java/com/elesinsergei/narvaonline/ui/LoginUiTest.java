@@ -19,6 +19,11 @@ public class LoginUiTest extends BaseTest {
 
     LoginPage loginPage = new LoginPage();
 
+    /**
+     * 1.Login via login and password on frontend
+     * 2.Verify login on frontend
+     * 3.Fast logout
+     */
     @Test
     @Story("Login with valid credentials")
     @DisplayName("Successful login to the admin panel")
@@ -31,5 +36,4 @@ public class LoginUiTest extends BaseTest {
 
         loginPage.fastLogout();
     }
-
 }

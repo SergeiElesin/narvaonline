@@ -9,12 +9,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for page
  */
-
 public class PageClient {
 
     private static final String PAGE_ENDPOINT = "/pages/";
 
-    //Getting page list
+    /**
+     * Getting page list
+     */
     @Step("Getting pages")
     public Response getPages() {
         return given()
@@ -27,7 +28,9 @@ public class PageClient {
                 response();
     }
 
-    //Page creation
+    /**
+     * Page creation
+     */
     @Step("Page creation")
     public Response createPage(Page page) {
         return given()
@@ -44,7 +47,9 @@ public class PageClient {
                 .extract().response();
     }
 
-    //Page removing (ID)
+    /**
+     * Page removing (ID)
+     */
     @Step("Deleting an page via API (ID: {id})")
     public void deletePage(int id) {
         given()

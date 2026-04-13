@@ -10,12 +10,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for event
  */
-
 public class EventClient {
 
     private static final String EVENT_ENDPOINT = "/lsvr_event/";
 
-    //Getting event list
+    /**
+     * Getting event list
+     */
     @Step("Getting events")
     public Response getEvents() {
         return given()
@@ -28,7 +29,9 @@ public class EventClient {
                 response();
     }
 
-    //Event creation
+    /**
+     * Event creation
+     */
     @Step("Event creation")
     public Response createEvent(Event event) {
         return given()
@@ -45,7 +48,9 @@ public class EventClient {
                 .extract().response();
     }
 
-    //Event removing (ID)
+    /**
+     * Event removing (ID)
+     */
     @Step("Deleting an event via API (ID: {id})")
     public void deleteEvent(int id) {
         given()

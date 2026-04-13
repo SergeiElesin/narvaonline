@@ -10,7 +10,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 /**
- * Class LoginPage contains methods for login and logout via logon form on UI
+ * Page Object for LoginPage
+ *Contains methods and data for login and logout via logon form on UI
  */
 public class LoginPage {
 
@@ -29,6 +30,9 @@ public class LoginPage {
         return this;
     }
 
+    /**
+     *Login with username and password on frontend
+     */
     @Step ("Login")
     public void login(String user, String password) {
         loginField.shouldBe(visible, Duration.ofSeconds(10)).setValue(user);
@@ -37,6 +41,9 @@ public class LoginPage {
         //actions().moveToElement($("#um-submit-btn")).click().perform();
     }
 
+    /**
+     * Login confirmation
+     */
     @Step("Login confirmation")
     public void shouldBeLoggedIn() {
         adminMenu.shouldBe(visible, Duration.ofSeconds(15)); // Если меню админки видно — логин прошел успешно

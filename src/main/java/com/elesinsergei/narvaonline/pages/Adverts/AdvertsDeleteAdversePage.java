@@ -7,11 +7,15 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$$;
 
 /**
- * Adverts - Delete advertise
+ * Page Object for AdvertsDeleteAdversePage
+ * Delete advertise
  */
 
 public class AdvertsDeleteAdversePage {
 
+    /**
+     * Delete advertise
+     */
     public AdvertsDeleteAdversePage deleteAd(String my_ads_page, String ad_title, String ads_page){
 
         // Go to personal account / ad management

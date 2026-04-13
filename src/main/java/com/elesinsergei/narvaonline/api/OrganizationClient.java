@@ -10,12 +10,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for organization
  */
-
 public class OrganizationClient {
 
     private static final String ORGANIZATIONS_ENDPOINT = "/lsvr_listing/";
 
-    //Getting orgs list
+    /**
+     * Getting organizations list
+     */
     @Step("Getting organizations")
     public Response getOrgs() {
         return given()
@@ -28,7 +29,9 @@ public class OrganizationClient {
                 response();
     }
 
-    //Organization creation
+    /**
+     * Organization creation
+     */
     @Step("Organization creation")
     public Response createOrg(Organization organization) {
         return given()
@@ -45,7 +48,9 @@ public class OrganizationClient {
                 .extract().response();
     }
 
-    //Organization removing (ID)
+    /**
+     * Organization removing (ID)
+     */
     @Step("Deleting an organization via API (ID: {id})")
     public void deleteOrgForce(int id) {
         given()

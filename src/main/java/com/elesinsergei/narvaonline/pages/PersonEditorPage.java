@@ -13,9 +13,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 /**
- * PersonEditorPage contains data and methods used for creation, testing and removal Person
+ * Page Object for PersonEditorPage
+ * Contains data and methods used for creation, testing and removal Person
  */
-
 public class PersonEditorPage {
 
     private final SelenideElement titleField = $(".editor-post-title__input");
@@ -31,7 +31,9 @@ public class PersonEditorPage {
     //Person in admin panel
     private final SelenideElement personInAdmin = $(By.xpath("//tr[contains(., 'Test Person via Selenide')]"));
 
-    //Person creation
+    /**
+     *Creation of person
+     */
     @Step("Person Creation")
     public void create(String title, String content) {
         titleField.setValue(title);
@@ -50,7 +52,10 @@ public class PersonEditorPage {
         $(".media-toolbar-primary .media-button-select").shouldBe(enabled).click();
     }
 
-    @Step("Publishing event")
+    /**
+     * Person publishing
+     */
+    @Step("Publishing person")
     public void publish() {
         // 1. Click the publish button
         publishButton.click();
@@ -62,24 +67,36 @@ public class PersonEditorPage {
         $("[data-testid='snackbar']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Запись опубликована."));;
     }
 
+    /**
+     * Check Person Publishing
+     */
     @Step("Check Person Publishing")
     public void checkPublish() {
         open("/people/");
         $(byText("Test Person via Selenide")).shouldBe(visible);
     }
 
+    /**
+     * Delete person into trash
+     */
     @Step("Delete person into trash")
     public void deleteCurrentPerson(){
         open(PERSON_LIST_URL);
         personInAdmin.hover().$(".submitdelete").click();
     };
 
+    /**
+     * Check person deletion on frontend
+     */
     @Step("Check person deletion on frontend")
     public void checkDelete() {
         open("/lyudi/");
         $(byText("Test Person via Selenide")).shouldNotBe(visible);
     }
 
+    /**
+     * Delete person from trash
+     */
     @Step("Delete person from trash")
     public void deleteFromTrash(){
         open(PERSON_TRASH_URL);

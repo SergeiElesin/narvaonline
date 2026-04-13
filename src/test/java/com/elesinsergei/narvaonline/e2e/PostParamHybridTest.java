@@ -25,6 +25,17 @@ public class PostParamHybridTest extends BaseTest {
 
     private Integer currentPostId;
 
+    /**
+     * Parameterized test.
+     * Create 6 posts
+     * Post 1: A regular post should be visible to everyone
+     * Post 2: Post with password – the text "Protected" should appear in the UI
+     * Post 3: Invalid data (no content or title). Expecting that the API may return an error (depending on WP settings)
+     * Post 4: HTML in title - XSS protection.
+     * Post 5: Very long title
+     * Post 6: Special characters in title
+     * Delete created posts after test
+     */
     @ParameterizedTest(name = "{0} (Status: {1})")
     @ArgumentsSource(PostParamHybridTestData.class)
     @Story("Parametrized posts creation, verify via UI, post removal")
@@ -61,6 +72,10 @@ public class PostParamHybridTest extends BaseTest {
         }
     }
 
+    /**
+     * Clean up.
+     * Delete every created post in PostParamHybridTest.
+     */
     @AfterEach
     void cleanUp() {
         if (currentPostId != null) {

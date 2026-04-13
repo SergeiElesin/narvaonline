@@ -7,16 +7,16 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
- * DashboardPage contains data and methods, that used on wordpress dashboard
+ * Page object for DashboardPage
+ * Contains data and methods, that used on wordpress dashboard
  */
-
 public class DashboardPage {
     //Post
-    private final SelenideElement postsMenu = $("#menu-posts"); // Меню "Записи"
-    private final SelenideElement addNewPost = $("a[href='post-new.php']"); // Ссылка "Добавить пост
+    private final SelenideElement postsMenu = $("#menu-posts"); // Menu "Posts"
+    private final SelenideElement addNewPost = $("a[href='post-new.php']"); // Link "Add post"
 
     //Organization
-    private final SelenideElement postsOrgMenu = $("#menu-posts-lsvr_listing"); // Меню "Каталог"
+    private final SelenideElement postsOrgMenu = $("#menu-posts-lsvr_listing"); // Menu "Listing"
     private final SelenideElement addNewOrg = $("a[href='post-new.php?post_type=lsvr_listing']"); // Ссылка добавить организацию"Добавить
 
     //Blog
@@ -35,36 +35,54 @@ public class DashboardPage {
     private final SelenideElement postsPageMenu = $("#menu-pages");
     private final SelenideElement addNewPageMenu = $("a[href='post-new.php?post_type=page']");
 
+    /**
+     * Open Create Post page
+     */
     @Step("Open Create Post page")
     public void goToNewPost() {
         postsMenu.hover();
         addNewPost.click();
     }
 
+    /**
+     * Open Create Organization page
+     */
     @Step("Open Create Organization page")
     public void goToNewOrg() {
         postsOrgMenu.hover();
         addNewOrg.click();
     }
 
+    /**
+     * Open Create Blog page
+     */
     @Step("Open Create Blog page")
     public void goToNewBlog(){
         postsBlogMenu.hover();
         addNewBlogMenu.click();
     }
 
+    /**
+     * Open Create Event page
+     */
     @Step("Open Create Event page")
     public void goToNewEvent(){
         postsEventMenu.hover();
         addNewEventMenu.click();
     }
 
+    /**
+     * Open Create Person page
+     */
     @Step("Open Create Person page")
     public void goToNewPerson(){
         postsPersonMenu.hover();
         addNewPersonMenu.click();
     }
 
+    /**
+     * Open Create Page page
+     */
     @Step("Open Create Page page")
     public void goToNewPage(){
         postsPageMenu.hover();

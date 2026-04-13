@@ -13,9 +13,9 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 /**
- * EventEditorPage contain data and methods for event creation, testing and removal
+ * Page Object for EventEditorPage
+ * Contains data and methods for event creation, testing and removal
  */
-
 public class EventEditorPage {
 
     private final SelenideElement titleField = $(".editor-post-title__input");
@@ -32,7 +32,9 @@ public class EventEditorPage {
     //Event in the admin panel
     private final SelenideElement eventInAdmin = $(By.xpath("//tr[contains(., 'Test Event via Selenide')]"));
 
-    //Event creation
+    /**
+     *Event creation
+     */
     @Step("Event Creation")
     public void createEvent(String title, String content) {
         titleField.setValue(title);
@@ -55,6 +57,9 @@ public class EventEditorPage {
         $(".media-toolbar-primary .media-button-select").shouldBe(enabled).click();
     }
 
+    /**
+     * Publishing event
+     */
     @Step("Publishing event")
     public void publish() {
         // 1. Click the publish button
@@ -67,29 +72,39 @@ public class EventEditorPage {
         $("[data-testid='snackbar']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Запись опубликована."));;
     }
 
+    /**
+     * Check Event Publishing
+     */
     @Step("Check Event Publishing")
     public void checkPublish(){
         open("/sobytiya/");
         $(byText("Test Event via Selenide")).shouldBe(visible);
     }
 
+    /**
+     * Delete event into trash
+     */
     @Step("Delete event into trash")
     public void deleteCurrentBlog(){
         open(EVENT_LIST_URL);
         eventInAdmin.hover().$(".submitdelete").click();
     };
 
+    /**
+     * Check blog deletion on frontend
+     */
     @Step("Check blog deletion on frontend")
     public void checkDelete() {
         open("/sobytiya/");
         $(byText("Test Event via Selenide")).shouldNotBe(visible);
     }
 
+    /**
+     * Delete event from trash
+     */
     @Step("Delete event from trash")
     public void deleteFromTrash(){
         open(EVENT_TRASH_URL);
         eventInAdmin.hover().$(".delete").click();
     }
-
-
 }

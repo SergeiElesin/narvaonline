@@ -32,6 +32,10 @@ public class PersonHybridTest extends BaseTest {
     PersonClient personClient = new PersonClient();
     LoginPage loginPage = new LoginPage();
 
+    /**
+     * 1.Person creation via APi
+     * 2.Verify created person on frontend, checking for title is visible
+     */
     @Test
     @Story("Person creation via APi, see person via UI")
     @DisplayName("Successful person creation via APi")
@@ -52,6 +56,12 @@ public class PersonHybridTest extends BaseTest {
         $(byText(personTitle)).should(exist);
     }
 
+    /**
+     * Clean up
+     * Removal person, created in PersonHybridTest.
+     * Checking for the absence of a person on frontend
+     * Fast logout.
+     */
     @AfterEach
     public void cleanUp() {
         // Check that the ID exists (the person was successfully created)

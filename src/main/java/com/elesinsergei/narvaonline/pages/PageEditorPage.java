@@ -13,9 +13,9 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 /**
- * PageEditorPage contains data and methods for Page creating, testing and removal
+ * Page Object for PageEditorPage
+ * Contains data and methods for Page creating, testing and removal
  */
-
 public class PageEditorPage {
 
     private final SelenideElement titleField = $(".editor-post-title__input");
@@ -31,7 +31,9 @@ public class PageEditorPage {
     //Person in Admin Panel
     private final SelenideElement pageInAdmin = $(By.xpath("//tr[contains(., 'Test Page via Selenide')]"));
 
-    //Page creation
+    /**
+     * Page Creation
+     */
     @Step("Page Creation")
     public void create(String title, String content) {
         titleField.setValue(title);
@@ -60,6 +62,9 @@ public class PageEditorPage {
 
     }
 
+    /**
+     * Page publishing
+     */
     @Step("Publishing page")
     public void publish() {
         // 1. Click the publish button
@@ -72,6 +77,9 @@ public class PageEditorPage {
         $("[data-testid='snackbar']").shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Страница опубликована."));;
     }
 
+    /**
+     * Check Page Publishing
+     */
     @Step("Check Page Publishing")
     public void checkPublish() {
         //Open page in new window - second window (browser tab)
@@ -86,12 +94,18 @@ public class PageEditorPage {
         switchTo().window(0);
     }
 
+    /**
+     * Delete page into trash
+     */
     @Step("Delete page into trash")
     public void deleteCurrentPage(){
         open(PAGE_LIST_URL);
         pageInAdmin.hover().$(".submitdelete").click();
     };
 
+    /**
+     * Check page deletion on frontend
+     */
     @Step("Check page deletion on frontend")
     public void checkDelete() {
         open(PAGE_LIST_URL);
@@ -99,6 +113,9 @@ public class PageEditorPage {
         pageInAdmin.shouldNotBe(visible);
     }
 
+    /**
+     * Delete person from trash
+     */
     @Step("Delete person from trash")
     public void deleteFromTrash(){
         open(PAGE_TRASH_URL);

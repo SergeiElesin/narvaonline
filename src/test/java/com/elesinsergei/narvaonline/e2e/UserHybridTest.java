@@ -33,6 +33,15 @@ public class UserHybridTest extends BaseTest {
     UserClient userClient = new UserClient();
 
     //User creation,
+
+    /**
+     * 1. Create User via API
+     * 2. Check user exists by slug
+     * 3. Login test on UI
+     * 4. Delete user (ID)
+     * 5. Check user not exists by slug
+     */
+
     @Test
     @Story("User creation, test login via UI, user removal via UI")
     @DisplayName("User creation, test login via UI, user removal via UI")
@@ -56,14 +65,14 @@ public class UserHybridTest extends BaseTest {
         Assertions.assertTrue(slugs.contains(username.toLowerCase()),
                 "Error: User " + username + " is not exists");
 
-        // 3. Test login
+        // 3. Login test on UI
         loginPage.openPage().login(username, password);
 
         $(byText(username)).shouldBe(Condition.visible);
 
         loginPage.fastLogout();
 
-        // 4. Delete (ID)
+        // 4. Delete user (ID)
         if (createdUserId != null) {
             userClient.deleteUser(createdUserId);
         }

@@ -6,13 +6,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 /**
- * Adverts - delete user
+ * Pge Object for AdvertsDeleteUserPage
+ * Delete user
  */
-
 public class AdvertsDeleteUserPage {
 
-    //HomePage homePage = new  HomePage();
-
+    /**
+     * Delete user
+     */
     public AdvertsDeleteUserPage deleteUser(String my_account, String test_password){
         open(my_account);
 
@@ -29,7 +30,7 @@ public class AdvertsDeleteUserPage {
         //3. Click Delete Account
         $("#um_account_submit_delete").shouldBe(visible).click();
 
-        //5.The main page opens, check the title
+        //4.The main page opens, check the title
         //homePage.openPage().verifyPageTitle("НАРВА ОНЛАЙН - городской портал | Здесь всё!");
 
         return this;

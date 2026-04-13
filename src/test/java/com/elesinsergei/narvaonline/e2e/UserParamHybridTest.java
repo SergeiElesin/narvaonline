@@ -32,6 +32,13 @@ public class UserParamHybridTest extends BaseTest {
     LoginPage loginPage = new  LoginPage();
     UserClient userClient = new UserClient();
 
+    /**
+     * Parameterized test. Create 3 users.
+     * First user successfully created. Login with first user credentials in UI form.
+     * Second user avoid creation - the password provided is too weak.
+     * Third user avoid creation - username is invalid because it contains invalid characters.
+     * Delete created user after test
+     */
     @ParameterizedTest(name = "Проверка создания юзера: {0}")
     @CsvSource({
             "1APItestParamUser, 7hxw!FDnj$Wk9DbFNj#F3A$bPARAM, apitestemail1@example.com, publish",
@@ -79,6 +86,10 @@ public class UserParamHybridTest extends BaseTest {
         }
     }
 
+    /**
+     * Clean up.
+     * Delete every created user in UserParamHybridTest.
+     */
     @AfterEach
     void cleanUp() {
         if (createdUserId != null) {

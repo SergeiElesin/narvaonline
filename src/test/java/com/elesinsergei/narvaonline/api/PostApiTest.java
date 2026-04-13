@@ -25,7 +25,9 @@ public class PostApiTest extends BaseTest {
 
     PostClient postClient = new PostClient();
 
-    //Getting list of posts
+    /**
+     * Getting list of posts
+     */
     @Test
     @DisplayName("Getting a list of posts")
     @Description("Check that the API returns a list of posts and a status code of 200.")
@@ -39,8 +41,13 @@ public class PostApiTest extends BaseTest {
                 .body("size()", greaterThan(0)) // Check, that at least one post in list exists
                 .body("title.rendered", hasItem(notNullValue())); // Check, that posts has titles
     }
-    
-    //Post creation, test by title, post removal
+
+    /**
+     * 1.Post creation
+     * 2.Verify on frontend by title
+     * 3.Post removal
+     * 4.Verify Post removal
+     */
     @Test
     @Story("Post creation, test, removal via APi")
     @DisplayName("Post creation and removal via API")
@@ -77,7 +84,5 @@ public class PostApiTest extends BaseTest {
         List<String> postTitles = responseAfterDel.jsonPath().getList("title.rendered");
         Assertions.assertFalse(postTitles.contains(postTitle),
                 "Error: Post '" + postTitle + "' is still in the list!");
-
-
     }
 }

@@ -20,6 +20,18 @@ import org.junit.jupiter.api.Test;
 @Feature("Event creation")
 public class CreateEventUiTest extends BaseTest {
 
+    /**
+     * 1.Login via UI
+     * 2.Go to event creation in admin panel
+     * 3.Event creation
+     * 4.Publishing event
+     * 5.Check of successful event creation
+     * 6.Removal event into trash
+     * 7.Permanent removal event from trash
+     * 8.Check of event removal on frontend
+     * 9.Removing a test image from the gallery
+     * 10.Fast logout
+     */
     @Test
     @Story("Event creation in admin dashboard")
     @DisplayName("Successful event creation and deletion")

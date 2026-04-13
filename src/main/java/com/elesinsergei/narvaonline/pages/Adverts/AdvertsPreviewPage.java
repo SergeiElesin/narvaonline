@@ -4,11 +4,17 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 /**
- * Adverts - preview page
+ * Page Object for AdvertsPreviewPage
+ * Preview added advertise
  */
 
 public class AdvertsPreviewPage{
 
+    /**
+     * Preview Advertise
+     * Check name
+     * Check price
+     */
     public AdvertsPreviewPage previewAd(String test_username, String ad_price){
         //Check name
         $(".adverts-single-author-name")
@@ -20,6 +26,9 @@ public class AdvertsPreviewPage{
         return this;
     }
 
+    /**
+     *Publishing advertise
+     */
     public AdvertsPreviewPage publishAd(){
         // Button «Submit»  on preview page
         //$(byTagAndText("input", "Опубликовать объявление"))
@@ -35,6 +44,10 @@ public class AdvertsPreviewPage{
         return this;
     }
 
+    /**
+     * Open advertise page
+     * Verify advertise publishing
+     */
     public AdvertsPreviewPage verifyAd(String ads_page){
             // Open ads public page
             open(ads_page);

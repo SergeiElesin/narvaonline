@@ -26,7 +26,9 @@ public class PageApiTest extends BaseTest {
 
     PageClient pageClient = new PageClient();
 
-    //Getting list of pages
+    /**
+     * Getting list of pages
+     */
     @Test
     @DisplayName("Getting a list of pages")
     @Description("Check that the API returns a list of pages and a status code of 200.")
@@ -41,7 +43,12 @@ public class PageApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that pages has titles
     }
 
-    //Page creation, test by title, page removal
+    /**
+     * 1. Page creation
+     * 2. Verify on frontend by title
+     * 3. Page removal
+     * 4. Verify page removal
+     */
     @Test
     @Story("Page creation, test, removal via APi")
     @DisplayName("Page creation and removal via API")

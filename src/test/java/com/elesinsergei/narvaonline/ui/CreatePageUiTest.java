@@ -20,6 +20,18 @@ import org.junit.jupiter.api.Test;
 @Feature("Page creation")
 public class CreatePageUiTest extends BaseTest {
 
+    /**
+     * 1.Login via UI
+     * 2.Go to page creation in admin panel
+     * 3.Page creation
+     * 4.Publishing page
+     * 5.Check of successful page creation
+     * 6.Removal page into trash
+     * 7.Permanent removal page from trash
+     * 8.Check of page removal on frontend
+     * 9.Removing a test image from the gallery
+     * 10.Fast logout
+     */
     @Test
     @Story("Page creation in admin dashboard")
     @DisplayName("Successful page creation and deletion")

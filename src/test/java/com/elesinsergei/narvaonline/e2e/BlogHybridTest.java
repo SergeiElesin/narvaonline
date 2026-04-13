@@ -34,6 +34,10 @@ public class BlogHybridTest extends BaseTest {
     BlogClient blogClient = new BlogClient();
     LoginPage loginPage = new LoginPage();
 
+    /**
+     * 1. Blog post creation via API
+     * 2. Verify blog post creation on frontend
+     */
     @Test
     @Story("Blog creation via APi, see post via UI")
     @DisplayName("Successful blog post creation via APi")
@@ -54,6 +58,13 @@ public class BlogHybridTest extends BaseTest {
         $(byText(blogTitle)).should(exist);
     }
 
+
+    /**
+     * Clean up
+     * Removal blog post, created in eventHybridTest.
+     * Checking for the absence of blog post on frontend.
+     * Fast logout.
+     */
     @AfterEach
     public void cleanUp() {
         // Check that the ID exists (the post was successfully created)

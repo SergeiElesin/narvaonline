@@ -7,11 +7,14 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 
 /**
- * Adverts - adding advertise by filling form
+ * Page Object for AdvertsAddPage
+ * Adding advertise by filling form
  */
-
 public class AdvertsAddPage {
 
+    /**
+     * Fill advertise page
+     */
     public AdvertsAddPage fillForm(
             String add_ad_page,
             String ad_phone,

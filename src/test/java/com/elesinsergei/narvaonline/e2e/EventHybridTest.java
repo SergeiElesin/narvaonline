@@ -32,6 +32,10 @@ public class EventHybridTest extends BaseTest {
     EventClient eventClient = new EventClient();
     LoginPage loginPage = new LoginPage();
 
+    /**
+     *1. Event creation via API
+     * 2. Check post creation on frontend
+     */
     @Test
     @Story("Event creation via APi, see post via UI")
     @DisplayName("Successful event post creation via APi")
@@ -54,6 +58,13 @@ public class EventHybridTest extends BaseTest {
         $(byText(eventTitle)).should(exist);
     }
 
+
+    /**
+     * Clean up
+     * Removal event, created in eventHybridTest.
+     * Checking for the absence of event on frontend.
+     * Fast logout.
+     */
     @AfterEach
     public void cleanUp() {
         // Check that the ID exists (the event was successfully created)

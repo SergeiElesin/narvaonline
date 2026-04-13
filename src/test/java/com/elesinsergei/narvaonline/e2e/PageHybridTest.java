@@ -32,6 +32,10 @@ public class PageHybridTest extends BaseTest {
     PageClient pageClient = new PageClient();
     LoginPage loginPage = new LoginPage();
 
+    /**
+     * 1.Page creation via APi
+     * 2.Verify created page on frontend, checking for title is visible
+     */
     @Test
     @Story("Page creation via APi, see post via UI")
     @DisplayName("Successful page post creation via APi")
@@ -54,6 +58,12 @@ public class PageHybridTest extends BaseTest {
         $(byText(pageTitle)).should(exist);
     }
 
+    /**
+     * Clean up
+     * Removal page, created in PageHybridTest.
+     * Checking for the absence of a page on frontend
+     * Fast logout.
+     */
     @AfterEach
     public void cleanUp() {
         // Check that the ID exists (the page was successfully created)

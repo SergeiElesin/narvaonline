@@ -27,7 +27,9 @@ public class OrganizationApiTest extends BaseTest {
 
     OrganizationClient orgClient = new OrganizationClient();
 
-    //Getting list of posts
+    /**
+     * Getting list of organizations
+     */
     @Test
     @DisplayName("Getting a list of organizations")
     @Description("Check that the API returns a list of organizations and a status code of 200.")
@@ -42,7 +44,12 @@ public class OrganizationApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that posts has titles
     }
 
-    //Organization creation, test by title, org removal
+    /**
+     * 1. Organization creation
+     * 2. Verify on frontend by title
+     * 3. Organization removal
+     * 4. Verify organization removal
+     */
     @Test
     @Story("Organization creation, test, removal via APi")
     @DisplayName("Organization creation and removal via API")

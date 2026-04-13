@@ -20,6 +20,17 @@ import org.junit.jupiter.api.Test;
 @Feature("Person creation")
 public class CreatePersonUiTest extends BaseTest {
 
+    /**
+     * 1.Login via UI
+     * 2.Go to person creation in admin panel
+     * 3.Person creation
+     * 4.Publishing person
+     * 5.Check of successful person creation
+     * 6.Removal person into trash
+     * 7.Permanent removal person from trash
+     * 8.Removing a test image from the gallery
+     * 9.Fast logout
+     */
     @Test
     @Story("Person creation in admin dashboard")
     @DisplayName("Successful person creation and deletion")

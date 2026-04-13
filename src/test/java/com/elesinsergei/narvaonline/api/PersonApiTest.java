@@ -26,7 +26,9 @@ public class PersonApiTest extends BaseTest {
 
     PersonClient personClient = new  PersonClient();
 
-    //Getting list of posts
+    /**
+     * Getting list of persons
+     */
     @Test
     @DisplayName("Getting a list of persons")
     @Description("Check that the API returns a list of persons and a status code of 200.")
@@ -41,7 +43,12 @@ public class PersonApiTest extends BaseTest {
                 .body("title.rendered", hasItem(notNullValue())); // Check, that persons has titles
     }
 
-    //Person creation, test by title, person removal
+    /**
+     * 1.Person creation
+     * 2.Verify on frontend by title
+     * 3.Person removal
+     * 4.Verify Person removal
+     */
     @Test
     @Story("Person creation, test, removal via APi")
     @DisplayName("Person creation and removal via API")

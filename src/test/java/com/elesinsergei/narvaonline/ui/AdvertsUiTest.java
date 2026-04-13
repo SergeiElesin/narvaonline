@@ -29,6 +29,9 @@ public class AdvertsUiTest extends BaseTest {
     AdvertsDeleteAdversePage advertsDeleteAdversePage = new AdvertsDeleteAdversePage();
     AdvertsDeleteUserPage advertsDeleteUserPage = new AdvertsDeleteUserPage();
 
+    /**
+     * User registration
+     */
     @Test
     @Order(1)
     @Story("User registration")
@@ -39,6 +42,9 @@ public class AdvertsUiTest extends BaseTest {
         $(byTagAndText("h1", TEST_USERNAME)).shouldBe(visible);
     }
 
+    /**
+     * Filling Ad Form
+     */
     @Test
     @Order(2)
     @Story("Form filling")
@@ -50,6 +56,9 @@ public class AdvertsUiTest extends BaseTest {
                 .shouldBe(visible);
     }
 
+    /**
+     * Review Ad
+     */
     @Test
     @Order(3)
     @Story("Ad review")
@@ -60,6 +69,9 @@ public class AdvertsUiTest extends BaseTest {
         //$(".adverts-price-box").shouldHave(text(AD_PRICE));
     }
 
+    /**
+     * Publishing Ad
+     */
     @Test
     @Order(4)
     @Story("Ad publishing")
@@ -71,6 +83,9 @@ public class AdvertsUiTest extends BaseTest {
                 .shouldBe(visible);
     }
 
+    /**
+     * Confirm Ad Publishing
+     */
     @Test
     @Order(5)
     @Story("Confirm publishing")
@@ -83,6 +98,9 @@ public class AdvertsUiTest extends BaseTest {
                 .shouldBe(visible);
     }
 
+    /**
+     * Delete Ad
+     */
     @Test
     @Order(6)
     @Story("Ad deleting")
@@ -95,6 +113,9 @@ public class AdvertsUiTest extends BaseTest {
                 .shouldNotBe(visible);
     }
 
+    /**
+     * Delete User
+     */
     @Test
     @Order(7)
     @Story("User deleting")
@@ -106,6 +127,9 @@ public class AdvertsUiTest extends BaseTest {
     }
 
     //Logout after tests
+    /**
+     * Fast logout after AdvertsUiTest
+     */
     @AfterAll
     public static void fastLogout() {
         clearBrowserCookies();

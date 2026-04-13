@@ -6,11 +6,15 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 /**
- * Adverts - register user on frontend
+ * Page Object for  AdvertsRegisterPage
+ * Register user on frontend
  */
 
 public class AdvertsRegisterPage {
 
+    /**
+     *Register User
+     */
     public AdvertsRegisterPage register(String test_username, String test_email, String test_password){
         open("/");
         $("a[href*='/obyavleniya/']").hover();

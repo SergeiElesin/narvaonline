@@ -9,12 +9,13 @@ import static io.restassured.RestAssured.given;
 /**
  * API Client for person
  */
-
 public class PersonClient {
 
     private static final String PERSON_ENDPOINT = "/lsvr_person/";
 
-    //Getting person list
+    /**
+     * Getting person list
+     */
     @Step("Getting persons")
     public Response getPersons() {
         return given()
@@ -27,7 +28,9 @@ public class PersonClient {
                 response();
     }
 
-    //Person creation
+    /**
+     * Person creation
+     */
     @Step("Person creation")
     public Response createPerson(Person person) {
         return given()
@@ -44,7 +47,9 @@ public class PersonClient {
                 .extract().response();
     }
 
-    //Person removing (ID)
+    /**
+     * Person removing (ID)
+     */
     @Step("Deleting an person via API (ID: {id})")
     public void deletePerson(int id) {
         given()
