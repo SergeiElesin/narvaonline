@@ -2,6 +2,7 @@ package com.elesinsergei.narvaonline.ui;
 
 import com.elesinsergei.narvaonline.BaseTest;
 import com.elesinsergei.narvaonline.pages.HomePage;
+import com.elesinsergei.narvaonline.pages.LoginPage;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 @Owner("Sergei Elesin")
 public class HomeUiTest extends BaseTest {
 
+    LoginPage loginPage = new  LoginPage();
     HomePage homePage = new HomePage();
 
     /**
@@ -28,5 +30,8 @@ public class HomeUiTest extends BaseTest {
     @Step("Checking page title: {expectedTitle}")
     void testNarvaonlineTitle() {
         homePage.openPage().verifyPageTitle("НАРВА ОНЛАЙН - городской портал | Здесь всё!");
+
+        loginPage.fastLogout();
     }
+
 }
