@@ -9,6 +9,7 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import static com.codeborne.selenide.Selenide.$;
 /**
  * UserHybridTest contains tests for users
  */
-
+@Tag("e2e")
 @Epic("E2E Tests")
 @Feature("Users API")
 public class UserHybridTest extends BaseTest {

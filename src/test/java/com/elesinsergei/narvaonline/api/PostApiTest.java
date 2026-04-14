@@ -6,6 +6,7 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * API test - getting list of posts, сreaton, testing, deleting post
  */
-
+@Tag("api")
 @Epic("API Tests")
 @Feature("Posts API")
 public class PostApiTest extends BaseTest {

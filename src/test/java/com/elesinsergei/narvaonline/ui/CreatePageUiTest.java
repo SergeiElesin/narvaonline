@@ -10,12 +10,13 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
  * CreatePageUiTest - test class for page
  */
-
+@Tag("ui")
 @Epic("UI Tests")
 @Feature("Page creation")
 public class CreatePageUiTest extends BaseTest {

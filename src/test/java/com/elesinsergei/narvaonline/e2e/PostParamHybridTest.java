@@ -10,13 +10,14 @@ import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ArgumentsSource;
 
 /**
  * Parameterized test: post creation, verification, removal depends on parameters
  */
-
+@Tag("e2e")
 @Epic("E2E parametrized Tests")
 @Feature("Parametrized post test")
 public class PostParamHybridTest extends BaseTest {

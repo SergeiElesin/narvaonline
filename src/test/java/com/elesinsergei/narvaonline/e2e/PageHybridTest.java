@@ -11,6 +11,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -21,6 +22,7 @@ import static com.codeborne.selenide.Selenide.open;
 /**
  * PageHybridTest contains tests for page creation and deletion
  */
+@Tag("e2e")
 @Epic("E2E Tests")
 @Feature("Authentication, page creation, check page existing, page delete")
 public class PageHybridTest extends BaseTest {

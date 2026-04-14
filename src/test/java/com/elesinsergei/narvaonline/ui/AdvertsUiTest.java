@@ -18,6 +18,7 @@ import static com.elesinsergei.narvaonline.data.AdvertsUiTestData.*;
  * Adverts full cycle testing of WPAdverts functionality: register user, adding advertise, preview, delete ads, delete user
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("ui")
 @Epic("UI Tests")
 @Feature("Adverse adding and deleting ")
 public class AdvertsUiTest extends BaseTest {

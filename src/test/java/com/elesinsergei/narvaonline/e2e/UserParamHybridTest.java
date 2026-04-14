@@ -12,6 +12,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -23,7 +24,7 @@ import static org.hamcrest.Matchers.hasItem;
 /**
  * Parameterized test: user creation, verification, removal depends on parameters
  */
-
+@Tag("e2e")
 @Epic("E2E parametrized Tests")
 @Feature("Parametrized User test")
 public class UserParamHybridTest extends BaseTest {

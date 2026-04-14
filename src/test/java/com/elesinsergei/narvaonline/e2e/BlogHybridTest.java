@@ -11,6 +11,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -21,7 +22,7 @@ import static com.codeborne.selenide.Selenide.open;
 /**
  * BlogHybridTest contains tests for Blog post creation and deletion
  */
-
+@Tag("e2e")
 @Epic("E2E Tests")
 @Feature("Authentication, blog post creation, check blog post existing, blog post delete")
 public class BlogHybridTest extends BaseTest {

@@ -2,7 +2,6 @@ plugins {
     java
     //Allure plugin
     id("io.qameta.allure") version "3.0.2"
-    //id("io.qameta.allure") version "2.11.2"
 }
 
 group = "com.elesinsergei"
@@ -14,7 +13,6 @@ repositories {
 
 val selenideVersion = "7.14.0"
 val restAssuredVersion = "5.5.6"
-//val allureVersion = "2.25.0"
 val allureVersion = "2.31.0"
 val junitVersion = "5.10.2"
 val slf4jVersion = "2.0.12"
@@ -22,7 +20,7 @@ val aspectjVersion = "1.9.22"
 
 dependencies {
 
-    // Основная библиотека Owner
+    // Main Owner library
     implementation("org.aeonbits.owner:owner:1.0.12")
 
     // Lombok
@@ -47,8 +45,10 @@ dependencies {
 
     // JUnit 5
     testImplementation("org.junit.jupiter:junit-jupiter:${junitVersion}")
+
     //  AssertJ
     testImplementation("org.assertj:assertj-core:3.27.7")
+    implementation("org.assertj:assertj-core:3.27.7")
 
     // Log
     testImplementation("org.slf4j:slf4j-simple:${slf4jVersion}")
@@ -71,7 +71,7 @@ dependencies {
 allure {
     version.set(allureVersion)
     adapter {
-        aspectjVersion.set("1.9.22") // Нужен для корректной работы аннотаций @Step
+        aspectjVersion.set("1.9.22") // Needed for @Step annotation
         frameworks {
             junit5 {
                 enabled.set(true)
@@ -80,17 +80,34 @@ allure {
         }
     }
 }
+/*
 
 tasks.test {
     useJUnitPlatform()
-    // Передаем системные свойства (например, для выбора браузера или URL)
+    // Passing system properties (for example, to select a browser or URL)
+    systemProperties(System.getProperties().asIterable().associate { it.key.toString() to it.value })
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+*/
+
+tasks.test {
+    useJUnitPlatform {
+        //for tag using in testing tasks (./gradlew test -Dgroups=api)
+        val groups = System.getProperty("groups")
+        if (groups != null) {
+            includeTags(groups)
+        }
+    }
+    //Passing system properties (for example, to select a browser or URL)
     systemProperties(System.getProperties().asIterable().associate { it.key.toString() to it.value })
     testLogging {
         events("passed", "skipped", "failed")
     }
 }
 
-//проект будет собираться на одной и той же версии Java у всех разработчиков и на сервере (CI/CD)
+//project will be built on the same version of Java for all developers and on the server (CI/CD)
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(21))

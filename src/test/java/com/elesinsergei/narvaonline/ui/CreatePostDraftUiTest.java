@@ -10,12 +10,13 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
  * CreatePostDraftUiTest - test class for post draft
  */
-
+@Tag("ui")
 @Epic("UI Tests")
 @Feature("Post creation")
 public class CreatePostDraftUiTest extends BaseTest {

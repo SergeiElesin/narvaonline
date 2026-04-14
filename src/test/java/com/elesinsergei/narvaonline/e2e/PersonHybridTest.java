@@ -11,6 +11,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -21,6 +22,7 @@ import static com.codeborne.selenide.Selenide.open;
 /**
  * PersonHybridTest contains tests for person creation and deletion
  */
+@Tag("e2e")
 @Epic("E2E Tests")
 @Feature("Authentication, person creation, check person existing, person delete")
 public class PersonHybridTest extends BaseTest {

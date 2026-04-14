@@ -12,6 +12,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selectors.byText;
@@ -20,7 +21,7 @@ import static com.codeborne.selenide.Selenide.*;
 /**
  * PostHybridTest contains tests for Posts
  */
-
+@Tag("e2e")
 @Epic("E2E Tests")
 @Feature("Authentication, post creation, check post existing, post delete")
 public class PostHybridTest extends BaseTest {

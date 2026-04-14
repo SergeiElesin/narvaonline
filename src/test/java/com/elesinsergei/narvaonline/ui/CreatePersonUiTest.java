@@ -10,6 +10,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -31,6 +32,7 @@ public class CreatePersonUiTest extends BaseTest {
      * 8.Removing a test image from the gallery
      * 9.Fast logout
      */
+    @Tag("ui")
     @Test
     @Story("Person creation in admin dashboard")
     @DisplayName("Successful person creation and deletion")

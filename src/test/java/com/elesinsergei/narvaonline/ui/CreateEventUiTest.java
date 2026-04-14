@@ -10,6 +10,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -32,6 +33,7 @@ public class CreateEventUiTest extends BaseTest {
      * 9.Removing a test image from the gallery
      * 10.Fast logout
      */
+    @Tag("ui")
     @Test
     @Story("Event creation in admin dashboard")
     @DisplayName("Successful event creation and deletion")
