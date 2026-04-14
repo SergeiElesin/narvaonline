@@ -170,7 +170,7 @@ Sensitive data and environment settings are stored in GitHub repository settings
 
 ### View the latest report online
 
-🔗 [https://sergeielesin.github.io/narvaonline/18/index.html](https://sergeielesin.github.io/narvaonline/18/index.html)
+🔗 [https://sergeielesin.github.io/narvaonline/index.html](https://sergeielesin.github.io/narvaonline/index.html)
 
 ### Generate and open locally
 
