@@ -13,7 +13,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.*;
 
 /**
- * API test - getting list of posts, сreaton, testing, deleting post
+ * API test - getting list of posts, сreation, testing, deleting post
  */
 @Tag("api")
 @Epic("API Tests")
@@ -45,7 +45,7 @@ public class PostApiTest extends BaseTest {
 
     /**
      * 1.Post creation
-     * 2.Verify on frontend by title
+     * 2.Verify creation
      * 3.Post removal
      * 4.Verify Post removal
      */

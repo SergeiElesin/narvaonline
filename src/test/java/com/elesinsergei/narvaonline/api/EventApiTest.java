@@ -46,7 +46,7 @@ public class EventApiTest extends BaseTest {
 
     /**
      * 1.Event creation
-     * 2. Verify on frontend by title
+     * 2. Verify creation by title
      * 3.Event removal
      * 4.Verify event removal
      */

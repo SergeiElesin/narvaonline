@@ -46,7 +46,7 @@ public class PersonApiTest extends BaseTest {
 
     /**
      * 1.Person creation
-     * 2.Verify on frontend by title
+     * 2.Verify creation by title
      * 3.Person removal
      * 4.Verify Person removal
      */

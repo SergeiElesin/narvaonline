@@ -47,7 +47,7 @@ public class OrganizationApiTest extends BaseTest {
 
     /**
      * 1. Organization creation
-     * 2. Verify on frontend by title
+     * 2. Verify creation by title
      * 3. Organization removal
      * 4. Verify organization removal
      */

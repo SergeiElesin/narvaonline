@@ -46,7 +46,7 @@ public class BlogApiTest extends BaseTest {
 
     /**
      * 1.Blog post creation
-     * 2. Verify on frontend by title
+     * 2. Verify creation by title
      * 3.Blog post removal
      * 4.Verify blog post removal
      */
