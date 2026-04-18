@@ -2,16 +2,21 @@ package com.elesinsergei.narvaonline.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Step;
+import io.qameta.allure.selenide.AllureSelenide;
 
+import java.sql.SQLOutput;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
+
 
 /**
  * Page Object for LoginPage
- *Contains methods and data for login and logout via logon form on UI
+ * Contains methods and data for login and logout via logon form on UI
  */
 public class LoginPage {
 
@@ -31,15 +36,38 @@ public class LoginPage {
     }
 
     /**
-     *Login with username and password on frontend
+     * Login with username and password on frontend
      */
-    @Step ("Login")
+    //@Step("Login")
     public void login(String user, String password) {
-        loginField.shouldBe(visible, Duration.ofSeconds(10)).setValue(user);
-        passwordField.shouldBe(visible).setValue(password);
-        submitButton.pressEnter();
-        //actions().moveToElement($("#um-submit-btn")).click().perform();
+
+        step("Login via username and password", () -> {
+            // Set off Allure Listener
+            SelenideLogger.removeListener("AllureSelenide");
+
+            try {
+                loginField.shouldBe(visible, Duration.ofSeconds(10)).setValue(user);
+                passwordField.shouldBe(visible).setValue(password);
+                submitButton.pressEnter();
+            } finally {
+                // Set on Allure Listener back
+                SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
+                        .screenshots(true)
+                        .savePageSource(true));
+            }
+        });
     }
+
+//unsafe method - can see username and password in Allure Report
+    /*public void login(String user, String password) {
+        step("Login via username and password", () -> {
+            $("#user").setValue(user);
+            $("#pass").setValue(password);
+            loginField.shouldBe(visible, Duration.ofSeconds(10)).setValue(user);
+            passwordField.shouldBe(visible).setValue(password);
+            submitButton.pressEnter();
+        });
+    }*/
 
     /**
      * Login confirmation
