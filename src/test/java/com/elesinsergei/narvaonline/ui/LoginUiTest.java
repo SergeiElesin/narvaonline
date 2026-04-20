@@ -28,10 +28,27 @@ public class LoginUiTest extends BaseTest {
     @Test
     @Story("Login with valid credentials")
     @DisplayName("Successful login to the admin panel")
-    @Step("Successful autentication")
-    public void shouldLoginAsAdmin() {
+    @Step("Successful authentication")
+    public void shouldLoginAsAdminTest() {
         loginPage.openPage()
                 .login(USER_NAME, PASSWORD); // Тут подставь свои данные
+
+        loginPage.shouldBeLoggedIn();
+
+        loginPage.fastLogout();
+    }
+
+    /**
+     * 1.Login via login and password on frontend with cookies
+     * 3.Verify login on frontend
+     * 3.Fast logout
+     */
+    @Test
+    @DisplayName("Login with cookies")
+    @Story("Login with cookies and test via UI")
+    @Step("Successful authentication with cookies")
+    public void loginWithCookiesTest(){
+        loginPage.loginWithCookies(USER_NAME, PASSWORD, BASE_URL, BASE_URL + "/loginly5r21p08qka3gpsoufk3o95");
 
         loginPage.shouldBeLoggedIn();
 
